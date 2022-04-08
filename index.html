@@ -299,12 +299,12 @@
 </ul>
 <h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>cookie：网站向访问电脑写入的小文本，记录用户ID、密码、停留时间等，大多数是4KB。cookie分成两类：1.内存Cookie，保存在内存，浏览器关闭就消失；2.硬盘Cookie，保存在硬盘里，有过期时间。</p>
 <p>HTTP协议是一种无状态协议（服务器不会记录客户端的历史请求），cookie和session的主要目的就是为了弥补HTTP的无状态特性</p>
-<p><img src="https://krismile-ni.github.io/2022/04/08/JWT%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.assets/1.png">)</p>
+<p><img src="https://krismile-ni.github.io/2022/04/08/image/1.png"></p>
 <p>​    1、当用户第一次访问服务器时，服务器可以响应信息（response）中增加Set-Cookie响应头，将信息以cookie为载体发送到浏览器</p>
 <p>​    2、浏览器接收到服务器放来的Cookie信息，将它保存到浏览器的缓冲区</p>
 <p>​    3、当浏览器再次访问服务器时，将Cookie放在请求消息中，Web服务器就可以通过request中的用户信息来分辨请求的用户</p>
 <h4 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h4><p>session：客户端请求服务端，服务端会为这次请求开辟一块内存空间，这个对象便是session对象，存储结构为concurrentHashMap。session弥补了HTTP无状态特性，服务器可以利用Session存储客户端在同一个会话期间的一些操作记录，服务器也为session设置了一个有效期（30分钟）</p>
-<p><img src="https://krismile-ni.github.io/2022/04/08/JWT%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.assets/2.png"></p>
+<p><img src="https://krismile-ni.github.io/2022/04/08/image/2.png"></p>
 <p>session原理：</p>
 <ol>
 <li>服务器第一次接收到请求时，开辟了一块session空间（创建session对象），同时生成一个sessionid，并通过响应头的<code>set-cookie:JSESSIONID=xxxxxx</code>命令，向客户端发送要求设置cookie的响应</li>
@@ -338,7 +338,7 @@
 <p>以后，用户与服务端通信的时候，都要发回这个 JSON 对象。服务器完全只靠这个对象认定用户身份。为了防止用户篡改数据，服务器在生成这个对象的时候，会加上签名。</p>
 <p>服务器就不保存任何 session 数据了，也就是说，服务器变成无状态了，从而比较容易实现扩展。</p>
 <h3 id="数据结构："><a href="#数据结构：" class="headerlink" title="数据结构："></a>数据结构：</h3><p>JWT结构：</p>
-<p><img src="https://krismile-ni.github.io/2022/04/08/JWT%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.assets/3.png" alt="img"></p>
+<p><img src="https://krismile-ni.github.io/2022/04/08/image/3.png" alt="img"></p>
 <p>它是一个很长的字符串，中间用点（.）分隔成三个部分。注意，JWT 内部是没有换行的</p>
 <p>JWT 的三个部分依次如下:</p>
 <ul>
