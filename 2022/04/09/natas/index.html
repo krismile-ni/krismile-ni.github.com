@@ -15,15 +15,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于我">
-<meta property="og:url" content="https://krismile-ni.github.com/about/index.html">
+<meta name="description" content="natas9知识点：命令注入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="natas">
+<meta property="og:url" content="https://krismile-ni.github.com/2022/04/09/natas/index.html">
 <meta property="og:site_name" content="KrismileBlog">
+<meta property="og:description" content="natas9知识点：命令注入">
 <meta property="og:locale">
-<meta property="article:published_time" content="2022-04-06T07:03:31.000Z">
-<meta property="article:modified_time" content="2022-04-06T07:04:56.788Z">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/natas/1.png">
+<meta property="article:published_time" content="2022-04-09T15:42:36.000Z">
+<meta property="article:modified_time" content="2022-04-18T03:26:56.162Z">
 <meta property="article:author" content="krismile">
+<meta property="article:tag" content="靶机">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://krismile-ni.github.com/2022/04/09/natas/1.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -57,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>关于我 | KrismileBlog</title>
+<title>natas | KrismileBlog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -67,7 +72,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -253,11 +258,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-natas" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-      <time datetime="2022-04-06T07:03:31.000Z" itemprop="datePublished">2022-04-06</time>
+      <a href="/2022/04/09/natas/" class="article-date">
+      <time datetime="2022-04-09T15:42:36.000Z" itemprop="datePublished">2022-04-09</time>
 </a>
 
 
@@ -272,7 +277,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于我
+      natas
     </h1>
   
 
@@ -280,8 +285,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/%E9%9D%B6%E6%9C%BA%E7%BB%83%E4%B9%A0/">靶机练习</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -289,36 +302,94 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <h3 id="natas9"><a href="#natas9" class="headerlink" title="natas9"></a>natas9</h3><p>知识点：命令注入</p>
+<span id="more"></span>
 
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Output:</span><br><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span></span><br><span class="line">&lt;?</span><br><span class="line">$key = &quot;&quot;;</span><br><span class="line"></span><br><span class="line">if(array_key_exists(&quot;needle&quot;, $_REQUEST)) &#123;</span><br><span class="line">    $key = $_REQUEST[&quot;needle&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if($key != &quot;&quot;) &#123;</span><br><span class="line">    passthru(&quot;grep -i $key dictionary.txt&quot;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-          
-        
+<p>在php中调用外部命令，三种方式实现：</p>
+<blockquote>
+<p>（1）system()函数</p>
+<p>​          string system(string command [, int return_var])</p>
+<p>（2）exec()函数</p>
+<p>​          string exec(string command [, string array [, int return _var]])</p>
+<p>exec()函数执行给定的命令，不输出结果，而是返回结果的最后一行。虽然只返回命令结果的最后一行，但用第二个参数array可以得到完整的结果</p>
+<p>（3）passthru()函数</p>
+<p>​           passthru(string <code>$command</code>, int <code>&amp;$result_code</code> &#x3D; <strong><code>null</code></strong>): ?bool</p>
+<p>passthru()函数–执行外部程序并且原始输出</p>
+</blockquote>
+<p>php代码调用passthru函数执行grep命令来查找key是否在dictionary.txt中，由此想到<strong>命令注入漏洞</strong></p>
+<p>想要通过passthru函数调用命令，但先要截断grep命令（使用；或|或&amp;截取）&#x2F;&#x2F;也叫管道服务，才能执行我们要执行的命令。该平台的密码存储在&#x2F;etc&#x2F;natas_webpass目录下</p>
+<p>构造：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| cat /etc/natas_webpass/natas10 #</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/09/natas/1.png" alt="image-20220412234200988"></p>
+
       
     </div>
     
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2022/04/09/natas/">natas</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
+        <p><span>发布时间:</span>2022-04-09, 23:42:36</p>
+        <p><span>最后更新:</span>2022-04-18, 11:26:56</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2022/04/09/natas/" title="natas">https://krismile-ni.github.com/2022/04/09/natas/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://krismile-ni.github.com/2022/04/09/natas/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2022/04/11/RCE/">
+                    RCE
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">
+                    XSS攻击
+                </a>
+            </div>
+        
+    </nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#natas9"><span class="toc-number">1.</span> <span class="toc-text">natas9</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -336,7 +407,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"关于我　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"natas　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -355,8 +426,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://krismile-ni.github.com/about/index.html';
-            this.page.identifier = 'about/index.html';
+            this.page.url = 'https://krismile-ni.github.com/2022/04/09/natas/';
+            this.page.identifier = '2022/04/09/natas/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -373,6 +444,26 @@
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2022/04/11/RCE/" title="上一篇: RCE">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/" title="下一篇: XSS攻击">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/11/RCE/">RCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/natas/">natas</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li></ul>
 
 
 
