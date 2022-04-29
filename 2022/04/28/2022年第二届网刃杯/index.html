@@ -17,7 +17,7 @@
 
 <meta name="description" content="2022网刃杯WP第一次比赛做出2题，继续加油。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2022网刃杯WP">
+<meta property="og:title" content="2022网刃杯">
 <meta property="og:url" content="https://krismile-ni.github.com/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/index.html">
 <meta property="og:site_name" content="KrismileBlog">
 <meta property="og:description" content="2022网刃杯WP第一次比赛做出2题，继续加油。">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://krismile-ni.github.com/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/13.png">
 <meta property="og:image" content="https://krismile-ni.github.com/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/14.png">
 <meta property="article:published_time" content="2022-04-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-04-28T15:48:35.365Z">
+<meta property="article:modified_time" content="2022-04-29T12:18:59.530Z">
 <meta property="article:author" content="krismile">
 <meta property="article:tag" content="ctf比赛">
 <meta name="twitter:card" content="summary">
@@ -75,7 +75,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>2022网刃杯WP | KrismileBlog</title>
+<title>2022网刃杯 | KrismileBlog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -91,12 +91,14 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: false
+        search: true
     }
 </script>
 
 
-    <script> yiliaConfig.jquery_ui = [false]; </script>
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
 
 
 
@@ -123,6 +125,13 @@
 
         
 
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
         
 
 
@@ -174,9 +183,11 @@
                     <nav class="header-menu">
                         <ul>
                         
-                            <li><a href="/archives/">所有文章</a></li>
+                            <li><a href="/archives/">首页</a></li>
                         
-                            <li><a href="/categories/">文章分类</a></li>
+                            <li><a href="/categories/">分类</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
                         
                             <li><a href="/about/">关于我</a></li>
                         
@@ -185,7 +196,7 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" href="/nichengxin1234@163.com" title="Email"></a>
                             
                                 <a class="fa GitHub" href="#" title="GitHub"></a>
                             
@@ -247,9 +258,11 @@
             <nav class="header-menu">
                 <ul>
                 
-                    <li><a href="/archives/">所有文章</a></li>
+                    <li><a href="/archives/">首页</a></li>
                 
-                    <li><a href="/categories/">文章分类</a></li>
+                    <li><a href="/categories/">分类</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
                 
                     <li><a href="/about/">关于我</a></li>
                 
@@ -259,7 +272,7 @@
             <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" target="_blank" href="/nichengxin1234@163.com" title="Email"></a>
                             
                                 <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
                             
@@ -274,12 +287,7 @@
       <div class="body-wrap"><article id="post-2022年第二届网刃杯" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      
-<span id="busuanzi_container_page_pv">
-  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-</span>      
-
-<a href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/" class="article-date">
+      <a href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/" class="article-date">
       <time datetime="2022-04-27T16:00:00.000Z" itemprop="datePublished">2022-04-28</time>
 </a>
 
@@ -295,7 +303,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      2022网刃杯WP
+      2022网刃杯
     </h1>
   
 
@@ -320,24 +328,24 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="2022网刃杯WP"><a href="#2022网刃杯WP" class="headerlink" title="2022网刃杯WP"></a>2022网刃杯WP</h1><p>第一次比赛做出2题，继续加油。</p>
+        <h2 id="2022网刃杯WP"><a href="#2022网刃杯WP" class="headerlink" title="2022网刃杯WP"></a>2022网刃杯WP</h2><p>第一次比赛做出2题，继续加油。</p>
 <span id="more"></span>
 
-<h3 id="ICS–easyiec"><a href="#ICS–easyiec" class="headerlink" title="ICS–easyiec"></a>ICS–easyiec</h3><p>流量分析</p>
+<h4 id="ICS–easyiec"><a href="#ICS–easyiec" class="headerlink" title="ICS–easyiec"></a>ICS–easyiec</h4><p>流量分析</p>
 <p>题目标题提醒了iec，筛选了iec60870_104，再进行追踪tcp流，发现了flag</p>
 <p><img src="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/1.png"></p>
-<h3 id="ICS–xyp07"><a href="#ICS–xyp07" class="headerlink" title="ICS–xyp07"></a>ICS–xyp07</h3><p>加密文件</p>
+<h4 id="ICS–xyp07"><a href="#ICS–xyp07" class="headerlink" title="ICS–xyp07"></a>ICS–xyp07</h4><p>加密文件</p>
 <p>用winhex打开，在最后发现base64加密，反复解密得到文件加密密码<code>Xyp77&amp;7&amp;77</code></p>
 <p><img src="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/2.png"></p>
 <p>用科来网络分析系统进行重放404，发现序号为1425的数据包有问题</p>
 <p><img src="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/3.png" alt="3"></p>
 <p><img src="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/4.png" alt="image-20220424173203260"></p>
 <p>base91解码得到flag</p>
-<h3 id="web–upload"><a href="#web–upload" class="headerlink" title="web–upload"></a>web–upload</h3><p>实则是sql注入</p>
+<h4 id="web–upload"><a href="#web–upload" class="headerlink" title="web–upload"></a>web–upload</h4><p>实则是sql注入</p>
 <p>filename处存在sql注入，使用报错注入：</p>
 <p><img src="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/5.png" alt="image-20220424211427455"></p>
 <p><img src="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/6.png" alt="image-20220424211157605"></p>
-<h2 id="复现其他题目"><a href="#复现其他题目" class="headerlink" title="复现其他题目"></a>复现其他题目</h2><h3 id="web–signin"><a href="#web–signin" class="headerlink" title="web–signin"></a>web–signin</h3><p>相关知识点：ssrf</p>
+<h3 id="复现其他题目"><a href="#复现其他题目" class="headerlink" title="复现其他题目"></a>复现其他题目</h3><h4 id="web–signin"><a href="#web–signin" class="headerlink" title="web–signin"></a>web–signin</h4><p>相关知识点：ssrf</p>
 <blockquote>
 <p>一、先用file伪协议进行读取<code>/etc/hosts</code>文件内容</p>
 <p><code>http://124.222.24.150:8091/?url=file:///etc/hosts</code>&#x2F;&#x2F;hosts文件包含了ip地址与主机名之间的映射,还包括主机的别名</p>
@@ -384,12 +392,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯WP</a></p>
+        <p><span>本文标题:</span><a href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
         <p><span>发布时间:</span>2022-04-28, 00:00:00</p>
-        <p><span>最后更新:</span>2022-04-28, 23:48:35</p>
+        <p><span>最后更新:</span>2022-04-29, 20:18:59</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/" title="2022网刃杯WP">https://krismile-ni.github.com/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/</a>
+            <span>原始链接:</span><a class="post-url" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/" title="2022网刃杯">https://krismile-ni.github.com/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/</a>
             <span class="copy-path" data-clipboard-text="原文: https://krismile-ni.github.com/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -417,7 +425,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2022%E7%BD%91%E5%88%83%E6%9D%AFWP"><span class="toc-number">1.</span> <span class="toc-text">2022网刃杯WP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ICS%E2%80%93easyiec"><span class="toc-number">1.0.1.</span> <span class="toc-text">ICS–easyiec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICS%E2%80%93xyp07"><span class="toc-number">1.0.2.</span> <span class="toc-text">ICS–xyp07</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web%E2%80%93upload"><span class="toc-number">1.0.3.</span> <span class="toc-text">web–upload</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E7%8E%B0%E5%85%B6%E4%BB%96%E9%A2%98%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">复现其他题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web%E2%80%93signin"><span class="toc-number">1.1.1.</span> <span class="toc-text">web–signin</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E7%BD%91%E5%88%83%E6%9D%AFWP"><span class="toc-number">1.</span> <span class="toc-text">2022网刃杯WP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ICS%E2%80%93easyiec"><span class="toc-number">1.0.1.</span> <span class="toc-text">ICS–easyiec</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ICS%E2%80%93xyp07"><span class="toc-number">1.0.2.</span> <span class="toc-text">ICS–xyp07</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#web%E2%80%93upload"><span class="toc-number">1.0.3.</span> <span class="toc-text">web–upload</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E7%8E%B0%E5%85%B6%E4%BB%96%E9%A2%98%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">复现其他题目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#web%E2%80%93signin"><span class="toc-number">1.1.1.</span> <span class="toc-text">web–signin</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -453,7 +461,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"2022网刃杯WP　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"2022网刃杯　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -507,7 +515,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯WP</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/17/RCE/">RCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/natas/">natas</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/17/RCE/">RCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/natas/">Natas</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li></ul>
 
 
 
@@ -548,6 +556,11 @@
         
     </div>
 </footer>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
     </div>
     
 <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
@@ -569,6 +582,19 @@
     </script>
 
 
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '[object Object]', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
 
 
 
