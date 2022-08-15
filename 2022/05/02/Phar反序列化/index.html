@@ -15,19 +15,19 @@
 
 
 
-<meta name="description" content="PHP反序列化漏洞—Phar反序列化前言phar简介phar全称PHP Archive，phar扩展提供了一种将整个PHP文件打包而成的一种压缩文档，类似Java中的jar包。.phar文件的最大特点是以序列化的形式储存用户自定义的meta-data。以扩展反序列化漏洞的攻击面，配合phar:&#x2F;&#x2F;协议使用。">
+<meta name="description" content="Web基础—PHP反序列化漏洞–Phar反序列化前言phar简介phar全称PHP Archive，phar扩展提供了一种将整个PHP文件打包而成的一种压缩文档，类似Java中的jar包。.phar文件的最大特点是以序列化的形式储存用户自定义的meta-data。以扩展反序列化漏洞的攻击面，配合phar:&#x2F;&#x2F;协议使用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Phar反序列化">
 <meta property="og:url" content="https://krismile-ni.github.com/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
 <meta property="og:site_name" content="KrismileBlog">
-<meta property="og:description" content="PHP反序列化漏洞—Phar反序列化前言phar简介phar全称PHP Archive，phar扩展提供了一种将整个PHP文件打包而成的一种压缩文档，类似Java中的jar包。.phar文件的最大特点是以序列化的形式储存用户自定义的meta-data。以扩展反序列化漏洞的攻击面，配合phar:&#x2F;&#x2F;协议使用。">
+<meta property="og:description" content="Web基础—PHP反序列化漏洞–Phar反序列化前言phar简介phar全称PHP Archive，phar扩展提供了一种将整个PHP文件打包而成的一种压缩文档，类似Java中的jar包。.phar文件的最大特点是以序列化的形式储存用户自定义的meta-data。以扩展反序列化漏洞的攻击面，配合phar:&#x2F;&#x2F;协议使用。">
 <meta property="og:locale">
 <meta property="og:image" content="https://krismile-ni.github.com/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/1.png">
 <meta property="og:image" content="https://krismile-ni.github.com/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/2.png">
 <meta property="og:image" content="https://krismile-ni.github.com/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/3.png">
 <meta property="og:image" content="https://krismile-ni.github.com/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/4.png">
 <meta property="article:published_time" content="2022-05-02T01:20:56.000Z">
-<meta property="article:modified_time" content="2022-08-12T12:37:11.188Z">
+<meta property="article:modified_time" content="2022-08-15T12:49:54.639Z">
 <meta property="article:author" content="krismile">
 <meta property="article:tag" content="web基础">
 <meta property="article:tag" content="Phar反序列化">
@@ -198,7 +198,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">Phar反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80%EF%BC%8CJWT/" rel="tag">web基础，JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">Phar反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80%EF%BC%8CJWT/" rel="tag">web基础，JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
                     </div>
                 </section>
                 
@@ -299,7 +299,7 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">PHP反序列化</a>
+    <a class="article-category-link" href="/categories/web%E5%9F%BA%E7%A1%80/">web基础</a>
     </div>
 
 
@@ -315,7 +315,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="PHP反序列化漏洞—Phar反序列化"><a href="#PHP反序列化漏洞—Phar反序列化" class="headerlink" title="PHP反序列化漏洞—Phar反序列化"></a>PHP反序列化漏洞—Phar反序列化</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><h4 id="phar简介"><a href="#phar简介" class="headerlink" title="phar简介"></a>phar简介</h4><p>phar全称PHP Archive，phar扩展提供了一种将整个PHP文件打包而成的一种压缩文档，类似Java中的jar包。<code>.phar</code>文件的最大特点是以序列化的形式储存用户自定义的meta-data。以扩展反序列化漏洞的攻击面，配合phar:&#x2F;&#x2F;协议使用。</p>
+        <h2 id="Web基础—PHP反序列化漏洞–Phar反序列化"><a href="#Web基础—PHP反序列化漏洞–Phar反序列化" class="headerlink" title="Web基础—PHP反序列化漏洞–Phar反序列化"></a>Web基础—PHP反序列化漏洞–Phar反序列化</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><h4 id="phar简介"><a href="#phar简介" class="headerlink" title="phar简介"></a>phar简介</h4><p>phar全称PHP Archive，phar扩展提供了一种将整个PHP文件打包而成的一种压缩文档，类似Java中的jar包。<code>.phar</code>文件的最大特点是以序列化的形式储存用户自定义的meta-data。以扩展反序列化漏洞的攻击面，配合phar:&#x2F;&#x2F;协议使用。</p>
 <span id="more"></span>
 
 <h4 id="phar反序列化简介"><a href="#phar反序列化简介" class="headerlink" title="phar反序列化简介"></a>phar反序列化简介</h4><p>PHP反序列化常见的是使用unserilize()进行反序列化，除此以外还有其他的反序列化方法，不需要用到unserilize()。例如phar反序列化。</p>
@@ -359,7 +359,7 @@
         <p><span>本文标题:</span><a href="/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">Phar反序列化</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
         <p><span>发布时间:</span>2022-05-02, 09:20:56</p>
-        <p><span>最后更新:</span>2022-08-12, 20:37:11</p>
+        <p><span>最后更新:</span>2022-08-15, 20:49:54</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="Phar反序列化">https://krismile-ni.github.com/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</a>
             <span class="copy-path" data-clipboard-text="原文: https://krismile-ni.github.com/2022/05/02/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -395,7 +395,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E2%80%94Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">PHP反序列化漏洞—Phar反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#phar%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">phar简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">phar反序列化简介</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Phar%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">Phar基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#what%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">what文件结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#how%E7%94%9F%E6%88%90phar%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">how生成phar文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#how%E4%BC%AA%E9%80%A0phar%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.3.</span> <span class="toc-text">how伪造phar文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%88%A9%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">实际利用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.3.1.</span> <span class="toc-text">利用条件</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web%E5%9F%BA%E7%A1%80%E2%80%94PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E2%80%93Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">Web基础—PHP反序列化漏洞–Phar反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#phar%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">phar简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">phar反序列化简介</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Phar%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">Phar基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#what%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">what文件结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#how%E7%94%9F%E6%88%90phar%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">how生成phar文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#how%E4%BC%AA%E9%80%A0phar%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.3.</span> <span class="toc-text">how伪造phar文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%88%A9%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">实际利用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.3.1.</span> <span class="toc-text">利用条件</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
